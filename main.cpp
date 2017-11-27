@@ -7,7 +7,6 @@
 #include "glog/logging.h"
 #include "json.h"
 
-// for convenience
 using json = nlohmann::json;
 using ceres::AutoDiffCostFunction;
 using ceres::CostFunction;
@@ -16,12 +15,11 @@ using ceres::Solver;
 using ceres::Solve;
 using namespace std;
 
-
 struct DepthResidual {
     DepthResidual(float w, float f) : w_(w), f_(f){};
 
     template <typename T> bool operator()(const T* const depth,
-            const T*const real_width, T* residual) const {
+                                          const T*const real_width, T* residual) const {
         residual[0] = depth[0] - real_width[0] / w_ * f_;
         return true;
     }
@@ -47,27 +45,34 @@ private:
 
 struct VelocityResidual {
     template <typename T> bool operator()(const T*const x2, const T*const x1,
-            const T*const x0, T* residual) const {
+                                          const T*const x0, T* residual) const {
         residual[0] = x2[0] - 2.0 * x1[0] + x0[0];
         return true;
     }
 };
 
-
 DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
 
-int main(int argc, char** argv) {
-//    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
-    google::InitGoogleLogging(argv[0]);
-
+float getCurrentDepth(vector<vector<float>>, int end_index) {
     // init car manager
     float focal_len = 623.5383;
     float camera_height = 1.5165;
     float static_foex = 640;
     float static_foey = 360;
 
+    int window_length = 10;
+
+
+
+
+}
+
+int main(int argc, char** argv) {
+//    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
+    google::InitGoogleLogging(argv[0]);
+
     // load data from json
-    string json_path = "../data/1280_720.json";
+    string json_path = "/home/wanghf/momenta/1280_720.json";
     ifstream json_file(json_path);
     json json_frame;
     json_file >> json_frame;
@@ -75,6 +80,8 @@ int main(int argc, char** argv) {
 
     json frames = json_frame["frames"];
     vector<vector<float>> cuboid_2d;
+    vector<vector<float>> tailstock;
+    vector<vector<float>> gt_velocity;
 
     // iterate for each image
     for (auto &frame : frames) {
@@ -85,10 +92,11 @@ int main(int argc, char** argv) {
 //            cout << car["trackid"] << endl;
             int track_id_int = car["trackid"];
 
-            vector<float> gt_velocity = car["gt_velocity"];
+
 
             vector<vector<float>> cur = car["cuboid_2d"];
-            if (track_id_int == 62233) {
+
+            if (track_id_int == 388889) {
                 for (vector<float> i : cur) {
                     cuboid_2d.push_back(i);
                 }
@@ -96,77 +104,38 @@ int main(int argc, char** argv) {
 
             vector<vector<float>> cuboid_3d = car["cuboid_3d"];
 
-
         } // end of cars
 
     } // end of frames
 
-    for (vector<float> i : cuboid_2d) {
-        for (float f : i) {
-            cout << f << ", ";
-        }
-        cout << endl;
+
+    int image_cnt = cuboid_2d.size() / 8;
+    for (int i = 0; i < image_cnt; i++) {
+        vector<float> temp;
+        // y
+        float y = (cuboid_2d[i * 8 + 2][1] - cuboid_2d[i * 8 + 6][1] +
+                   cuboid_2d[i * 8 + 1][1] - cuboid_2d[i * 8 + 5][1]) / 2;
+        temp.push_back(y);
+        // w
+        float w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
+                   cuboid_2d[i * 8 + 5][0] - cuboid_2d[i * 8 + 6][0]) / 2;
+        temp.push_back(w);
+
+        tailstock.push_back(temp);
     }
 
-    vector<vector<vector<float>>> backbone;
-//    for (auto it = json_frame.begin(); it != json_frame.end(); ++it) {
-//        string track_id_str = it.key();
-//        auto &frames = it.value();
-//        if (track_id_str.length() == 0) continue;
-//
-//        // only eval on forward car
-//        bool side_view = false;
-//        bool flat_road = true;
-//        for (auto &frame : frames) {
-//            json car = frame["cars"];
-//
-//            float gt_yaw = frame[1];
-//            vector<vector<float>> cuboid_3d = frame["cuboid_3d"];
-//            double time_stamp = frame["time_stamp"];
-//            vector<float> gt_velocity = frame["gt_velocity"];
-//
-////            Point3f gt_position = Point3f((cuboid_3d[0][0] + cuboid_3d[1][0] + cuboid_3d[2][0] + cuboid_3d[3][0])/4,
-////                                          (cuboid_3d[0][1] + cuboid_3d[1][1] + cuboid_3d[2][1] + cuboid_3d[3][1])/4,
-////                                          (cuboid_3d[0][2] + cuboid_3d[1][2] + cuboid_3d[2][2] + cuboid_3d[3][2])/4);
-////
-////            double lateral_range = 5;
-////            if (gt_position.x > lateral_range || gt_position.x < -lateral_range)
-////                side_view = true;
-////            double height_range = 0.5;
-////            if (gt_position.y > cam_param.hei_cam_ + height_range ||
-////                gt_position.y < cam_param.hei_cam_ - height_range) {
-////                // cout << "gt y: " << gt_position.y << endl;
-////                flat_road = false;
-////            }
+//    for (vector<float> i : gt_velocity) {
+//        for (float j : i) {
+//            cout << j << ",";
 //        }
-//        if (side_view || (!flat_road))
-//            continue;
-//
-//        for (auto &frame : frames) {
-////            fidx++;
-//
-//            bool show_img = false;
-//            bool draw_img = false;
-//
-//            double time_stamp = frame["time_stamp"];
-//            // cout << "time stamp: " << std::setprecision(9) << time_stamp << endl;
-//
-//            string img_name = frame["img_name"];
-//            float gt_yaw = frame["gt_yaw"];
-//            // vector<float> gt_position = frame["gt_position"];
-//            vector<float> gt_velocity = frame["gt_velocity"];
-//            int yaw_cls = frame["yaw_cls"];
-//            vector<vector<float>> cuboid_2d = frame["cuboid_2d"];
-//            vector<vector<float>> cuboid_3d = frame["cuboid_3d"];
-//
-//
-//            // do your optimization here...
-//
-//        } // frame
+//        cout << endl;
+//    }
+//    cout << tailstock.size() << endl;
 
-
-//    } // tracklet
-
+    vector<float> depth_estimation;
+    for (int i = 9; i < image_cnt; i++) {
+        depth_estimation.push_back(getCurrentDepth(tailstock, i));
+    }
 
 //    double x1 = 3.0;
 //    double x2 = -1.0;
@@ -206,3 +175,4 @@ int main(int argc, char** argv) {
 //              << ", x4 = " << x4 << "\n";
     return 0;
 }
+
