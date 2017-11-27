@@ -16,21 +16,21 @@ using ceres::Solve;
 using namespace std;
 
 struct DepthResidual {
-    DepthResidual(float w, float f) : w_(w), f_(f){};
+    DepthResidual(double w, double f) : w_(w), f_(f){};
 
     template <typename T> bool operator()(const T* const depth,
-                                          const T*const real_width, T* residual) const {
+                                          const T* const real_width, T* residual) const {
         residual[0] = depth[0] - real_width[0] / w_ * f_;
         return true;
     }
 
 private:
-    const float w_;
-    const float f_;
+    const double w_;
+    const double f_;
 };
 
 struct RealWidthResidual {
-    RealWidthResidual(float hc, float w, float y) : hc_(hc), w_(w), y_(y){};
+    RealWidthResidual(double hc, double w, double y) : hc_(hc), w_(w), y_(y){};
 
     template <typename T> bool operator()(const T*const real_width, T* residual) const {
         residual[0] = hc_ * w_ / y_ - real_width[0];
@@ -38,9 +38,9 @@ struct RealWidthResidual {
     }
 
 private:
-    const float hc_;
-    const float w_;
-    const float y_;
+    const double hc_;
+    const double w_;
+    const double y_;
 };
 
 struct VelocityResidual {
@@ -53,18 +53,37 @@ struct VelocityResidual {
 
 DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
 
-float getCurrentDepth(vector<vector<float>>, int end_index) {
+double getCurrentDepth(vector<vector<double>> obs, int end_index) {
     // init car manager
-    float focal_len = 623.5383;
-    float camera_height = 1.5165;
-    float static_foex = 640;
-    float static_foey = 360;
+    double focal_len = 623.5383;
+    double camera_height = 1.5165;
+    double static_foex = 640;
+    double static_foey = 360;
 
     int window_length = 10;
 
+    double x1 = camera_height / (obs[end_index - 9][0] - static_foey) * focal_len;
+    double x2 = camera_height / (obs[end_index - 8][0] - static_foey) * focal_len;
+    double x3 = camera_height / (obs[end_index - 7][0] - static_foey) * focal_len;
+    double x4 = camera_height / (obs[end_index - 6][0] - static_foey) * focal_len;
+    double x5 = camera_height / (obs[end_index - 5][0] - static_foey) * focal_len;
+    double x6 = camera_height / (obs[end_index - 4][0] - static_foey) * focal_len;
+    double x7 = camera_height / (obs[end_index - 3][0] - static_foey) * focal_len;
+    double x8 = camera_height / (obs[end_index - 2][0] - static_foey) * focal_len;
+    double x9 = camera_height / (obs[end_index - 1][0] - static_foey) * focal_len;
+    double x10 = camera_height / (obs[end_index - 0][0] - static_foey) * focal_len;
+    double w = camera_height / (obs[end_index - 5][0] - static_foey) * obs[end_index - 5][1];
+
+    Problem problem;
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 9][1], focal_len)), NULL, &x1, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 9][1], obs[end_index - 9][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x3, &x2, &x1);
 
 
-
+    return end_index;
 }
 
 int main(int argc, char** argv) {
@@ -79,9 +98,9 @@ int main(int argc, char** argv) {
     json_file.close();
 
     json frames = json_frame["frames"];
-    vector<vector<float>> cuboid_2d;
-    vector<vector<float>> tailstock;
-    vector<vector<float>> gt_velocity;
+    vector<vector<double>> cuboid_2d;
+    vector<vector<double>> tailstock;
+    vector<vector<double>> gt_velocity;
 
     // iterate for each image
     for (auto &frame : frames) {
@@ -94,15 +113,15 @@ int main(int argc, char** argv) {
 
 
 
-            vector<vector<float>> cur = car["cuboid_2d"];
+            vector<vector<double>> cur = car["cuboid_2d"];
 
             if (track_id_int == 388889) {
-                for (vector<float> i : cur) {
+                for (vector<double> i : cur) {
                     cuboid_2d.push_back(i);
                 }
             }
 
-            vector<vector<float>> cuboid_3d = car["cuboid_3d"];
+            vector<vector<double>> cuboid_3d = car["cuboid_3d"];
 
         } // end of cars
 
@@ -111,30 +130,34 @@ int main(int argc, char** argv) {
 
     int image_cnt = cuboid_2d.size() / 8;
     for (int i = 0; i < image_cnt; i++) {
-        vector<float> temp;
+        vector<double> temp;
         // y
-        float y = (cuboid_2d[i * 8 + 2][1] - cuboid_2d[i * 8 + 6][1] +
+        double y = (cuboid_2d[i * 8 + 2][1] - cuboid_2d[i * 8 + 6][1] +
                    cuboid_2d[i * 8 + 1][1] - cuboid_2d[i * 8 + 5][1]) / 2;
         temp.push_back(y);
         // w
-        float w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
+        double w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
                    cuboid_2d[i * 8 + 5][0] - cuboid_2d[i * 8 + 6][0]) / 2;
         temp.push_back(w);
 
         tailstock.push_back(temp);
     }
 
-//    for (vector<float> i : gt_velocity) {
-//        for (float j : i) {
+//    for (vector<double> i : gt_velocity) {
+//        for (double j : i) {
 //            cout << j << ",";
 //        }
 //        cout << endl;
 //    }
 //    cout << tailstock.size() << endl;
 
-    vector<float> depth_estimation;
+    vector<double> depth_estimation;
     for (int i = 9; i < image_cnt; i++) {
         depth_estimation.push_back(getCurrentDepth(tailstock, i));
+    }
+
+    for (double i : depth_estimation) {
+        cout << i << endl;
     }
 
 //    double x1 = 3.0;
