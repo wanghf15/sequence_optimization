@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/wanghf/CLionProjects/multi_var/json.h
+/home/wanghf/dev/momenta/sequence_optimization/json.h
 algorithm
 -
 array
@@ -62,7 +62,7 @@ utility
 vector
 -
 
-/home/wanghf/CLionProjects/multi_var/main.cpp
+/home/wanghf/dev/momenta/sequence_optimization/main.cpp
 iostream
 -
 vector
@@ -72,13 +72,13 @@ fstream
 glob.h
 -
 ceres/ceres.h
-/home/wanghf/CLionProjects/multi_var/ceres/ceres.h
+/home/wanghf/dev/momenta/sequence_optimization/ceres/ceres.h
 gflags/gflags.h
-/home/wanghf/CLionProjects/multi_var/gflags/gflags.h
+/home/wanghf/dev/momenta/sequence_optimization/gflags/gflags.h
 glog/logging.h
-/home/wanghf/CLionProjects/multi_var/glog/logging.h
+/home/wanghf/dev/momenta/sequence_optimization/glog/logging.h
 json.h
-/home/wanghf/CLionProjects/multi_var/json.h
+/home/wanghf/dev/momenta/sequence_optimization/json.h
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

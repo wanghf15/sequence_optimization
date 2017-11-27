@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/wanghf/CLionProjects/multi_var/main.cpp" "/home/wanghf/CLionProjects/multi_var/cmake-build-debug/CMakeFiles/multi_var.dir/main.cpp.o"
+  "/home/wanghf/dev/momenta/sequence_optimization/main.cpp" "/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles/multi_var.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
