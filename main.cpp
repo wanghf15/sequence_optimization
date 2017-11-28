@@ -81,9 +81,74 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
             new RealWidthResidual(camera_height, obs[end_index - 9][1], obs[end_index - 9][0])), NULL, &w);
     problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
             new VelocityResidual), NULL, &x3, &x2, &x1);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 8][1], focal_len)), NULL, &x2, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 8][1], obs[end_index - 8][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x4, &x3, &x2);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 7][1], focal_len)), NULL, &x3, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 7][1], obs[end_index - 7][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x5, &x4, &x3);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 6][1], focal_len)), NULL, &x4, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 6][1], obs[end_index - 6][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x6, &x5, &x4);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 5][1], focal_len)), NULL, &x5, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 5][1], obs[end_index - 5][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x7, &x6, &x5);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 4][1], focal_len)), NULL, &x6, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 4][1], obs[end_index - 4][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x8, &x7, &x6);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 3][1], focal_len)), NULL, &x7, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 3][1], obs[end_index - 3][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x9, &x8, &x7);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 2][1], focal_len)), NULL, &x8, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 2][1], obs[end_index - 2][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+            new VelocityResidual), NULL, &x10, &x9, &x8);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 1][1], focal_len)), NULL, &x9, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 1][1], obs[end_index - 1][0])), NULL, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
+            new DepthResidual(obs[end_index - 0][1], focal_len)), NULL, &x10, &w);
+    problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
+            new RealWidthResidual(camera_height, obs[end_index - 0][1], obs[end_index - 0][0])), NULL, &w);
 
+    Solver::Options options;
+    LOG_IF(FATAL, !ceres::StringToMinimizerType(FLAGS_minimizer, &options.minimizer_type))
+           << "Invalid minimizer : " << FLAGS_minimizer << ", valid options are : trust_region and line_search.";
 
-    return end_index;
+    options.max_num_iterations = 100;
+    options.linear_solver_type = ceres::DENSE_QR;
+    options.minimizer_progress_to_stdout = true;
+
+//    std::cout << "Initial x1 = " << x1 << ", x2 = " << x2
+//              << ", x3 = " << x3 << ", x4 = " << x4 << std::endl;
+
+    Solver::Summary summary;
+    Solve(options, &problem, &summary);
+
+//    cout << summary.FullReport();
+
+    return x10;
 }
 
 int main(int argc, char** argv) {
@@ -160,42 +225,6 @@ int main(int argc, char** argv) {
         cout << i << endl;
     }
 
-//    double x1 = 3.0;
-//    double x2 = -1.0;
-//    double x3 = 0.0;
-//    double x4 = 1.0;
-//
-//    Problem problem;
-//
-////    int window_length = 10;
-////    for (int i = 0; i < window_length; i++) {
-////        problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
-////                new DepthResidual(1 , 2)), NULL, &x1, &x2);
-////        problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1, 1>(
-////                new RealWidthResidual(1,1,1)), NULL, &x1);
-////        problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1>(
-////                new VelocityResidual), NULL, &x1);
-////    }
-//
-//    Solver::Options options;
-//    LOG_IF(FATAL, !ceres::StringToMinimizerType(FLAGS_minimizer, &options.minimizer_type))
-//           << "Invalid minimizer : " << FLAGS_minimizer << ", valid options are : trust_region and line_search.";
-//
-//    options.max_num_iterations = 100;
-//    options.linear_solver_type = ceres::DENSE_QR;
-//    options.minimizer_progress_to_stdout = true;
-//
-//    std::cout << "Initial x1 = " << x1 << ", x2 = " << x2
-//              << ", x3 = " << x3 << ", x4 = " << x4 << std::endl;
-//
-//    Solver::Summary summary;
-//    Solve(options, &problem, &summary);
-//
-//    std::cout << summary.FullReport() << "\n";
-//    std::cout <<"Final x1 = " << x1
-//              << ", x2 = " << x2
-//              << ", x3 = " << x3
-//              << ", x4 = " << x4 << "\n";
     return 0;
 }
 
