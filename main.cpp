@@ -107,6 +107,16 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
     return optimization_vars[window_length - 1];
 }
 
+/**
+ * 统计各个区间误差分布，并打印
+ * @param truth
+ * @param estimation
+ */
+void showStat(vector<double > truth, vector<double > estimation) {
+    double errors[5];
+    cout << errors[0];
+}
+
 int main(int argc, char** argv) {
 //    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
     google::InitGoogleLogging(argv[0]);
@@ -179,11 +189,15 @@ int main(int argc, char** argv) {
         depth_estimation.push_back(getCurrentDepth(tailstock, i));
     }
 
-    for (int i = 0 ; i < true_depth.size() / 2; i++) {
-        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
-             << setprecision(2) << (true_depth[i] - depth_estimation[i]) / true_depth[i] * 100.0 << "%" << "," <<
-             true_depth[i] << endl;
+    double errors[3];
+    int count = 0;
+    for (int i = 0 ; i < true_depth.size(); i++) {
+//        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
+//             << setprecision(2) << (true_depth[i] - depth_estimation[i]) / true_depth[i] * 100.0 << "%" << "," <<
+//             true_depth[i] << endl;
     }
+
+    showStat(true_depth, depth_estimation);
 
 
     return 0;
