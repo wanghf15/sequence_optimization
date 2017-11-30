@@ -7,10 +7,6 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "../CMakeLists.txt"
-  "CMakeFiles/3.8.2/CMakeCCompiler.cmake"
-  "CMakeFiles/3.8.2/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.8.2/CMakeSystem.cmake"
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/CMakeCInformation.cmake"
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/CMakeCXXInformation.cmake"
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/CMakeCommonLanguageInclude.cmake"
@@ -35,6 +31,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/Platform/Linux.cmake"
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/Platform/UnixPaths.cmake"
   "/home/wanghf/installs/clion-2017.2.3/bin/cmake/share/cmake-3.8/Modules/ProcessorCount.cmake"
+  "../CMakeLists.txt"
+  "CMakeFiles/3.8.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.8.2/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.8.2/CMakeSystem.cmake"
   "/usr/lib/cmake/eigen3/Eigen3Config.cmake"
   "/usr/local/lib/cmake/Ceres/CeresConfig.cmake"
   "/usr/local/lib/cmake/Ceres/CeresConfigVersion.cmake"

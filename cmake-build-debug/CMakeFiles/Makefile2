@@ -54,10 +54,10 @@ RM = /home/wanghf/installs/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/wanghf/dev/momenta/sequence_optimization
+CMAKE_SOURCE_DIR = /home/wanghf/momenta/sequence_optimization
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug
+CMAKE_BINARY_DIR = /home/wanghf/momenta/sequence_optimization/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/optimization.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /home/wanghf/dev/momenta/sequence_optimization/cmake-build-de
 CMakeFiles/optimization.dir/all:
 	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/depend
 	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target optimization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target optimization"
 .PHONY : CMakeFiles/optimization.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/optimization.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/optimization.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 3
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/optimization.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/optimization.dir/rule
 
 # Convenience name for target.

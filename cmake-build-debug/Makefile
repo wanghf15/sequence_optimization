@@ -48,10 +48,10 @@ RM = /home/wanghf/installs/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/wanghf/dev/momenta/sequence_optimization
+CMAKE_SOURCE_DIR = /home/wanghf/momenta/sequence_optimization
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug
+CMAKE_BINARY_DIR = /home/wanghf/momenta/sequence_optimization/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ optimization/fast:
 	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/build
 .PHONY : optimization/fast
 
+draw_util.o: draw_util.cpp.o
+
+.PHONY : draw_util.o
+
+# target to build an object file
+draw_util.cpp.o:
+	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.o
+.PHONY : draw_util.cpp.o
+
+draw_util.i: draw_util.cpp.i
+
+.PHONY : draw_util.i
+
+# target to preprocess a source file
+draw_util.cpp.i:
+	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.i
+.PHONY : draw_util.cpp.i
+
+draw_util.s: draw_util.cpp.s
+
+.PHONY : draw_util.s
+
+# target to generate assembly for a file
+draw_util.cpp.s:
+	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.s
+.PHONY : draw_util.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... optimization"
+	@echo "... draw_util.o"
+	@echo "... draw_util.i"
+	@echo "... draw_util.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -43,10 +43,10 @@ RM = /home/wanghf/installs/clion-2017.2.3/bin/cmake/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/wanghf/dev/momenta/sequence_optimization
+CMAKE_SOURCE_DIR = /home/wanghf/momenta/sequence_optimization
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug
+CMAKE_BINARY_DIR = /home/wanghf/momenta/sequence_optimization/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/optimization.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/optimization.dir/flags.make
 
 CMakeFiles/optimization.dir/main.cpp.o: CMakeFiles/optimization.dir/flags.make
 CMakeFiles/optimization.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/optimization.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/optimization.dir/main.cpp.o -c /home/wanghf/dev/momenta/sequence_optimization/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/optimization.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/optimization.dir/main.cpp.o -c /home/wanghf/momenta/sequence_optimization/main.cpp
 
 CMakeFiles/optimization.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optimization.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/dev/momenta/sequence_optimization/main.cpp > CMakeFiles/optimization.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/main.cpp > CMakeFiles/optimization.dir/main.cpp.i
 
 CMakeFiles/optimization.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimization.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/dev/momenta/sequence_optimization/main.cpp -o CMakeFiles/optimization.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/main.cpp -o CMakeFiles/optimization.dir/main.cpp.s
 
 CMakeFiles/optimization.dir/main.cpp.o.requires:
 
@@ -81,14 +81,40 @@ CMakeFiles/optimization.dir/main.cpp.o.provides: CMakeFiles/optimization.dir/mai
 CMakeFiles/optimization.dir/main.cpp.o.provides.build: CMakeFiles/optimization.dir/main.cpp.o
 
 
+CMakeFiles/optimization.dir/draw_util.cpp.o: CMakeFiles/optimization.dir/flags.make
+CMakeFiles/optimization.dir/draw_util.cpp.o: ../draw_util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/optimization.dir/draw_util.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/optimization.dir/draw_util.cpp.o -c /home/wanghf/momenta/sequence_optimization/draw_util.cpp
+
+CMakeFiles/optimization.dir/draw_util.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/optimization.dir/draw_util.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/draw_util.cpp > CMakeFiles/optimization.dir/draw_util.cpp.i
+
+CMakeFiles/optimization.dir/draw_util.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/optimization.dir/draw_util.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/draw_util.cpp -o CMakeFiles/optimization.dir/draw_util.cpp.s
+
+CMakeFiles/optimization.dir/draw_util.cpp.o.requires:
+
+.PHONY : CMakeFiles/optimization.dir/draw_util.cpp.o.requires
+
+CMakeFiles/optimization.dir/draw_util.cpp.o.provides: CMakeFiles/optimization.dir/draw_util.cpp.o.requires
+	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.o.provides.build
+.PHONY : CMakeFiles/optimization.dir/draw_util.cpp.o.provides
+
+CMakeFiles/optimization.dir/draw_util.cpp.o.provides.build: CMakeFiles/optimization.dir/draw_util.cpp.o
+
+
 # Object files for target optimization
 optimization_OBJECTS = \
-"CMakeFiles/optimization.dir/main.cpp.o"
+"CMakeFiles/optimization.dir/main.cpp.o" \
+"CMakeFiles/optimization.dir/draw_util.cpp.o"
 
 # External object files for target optimization
 optimization_EXTERNAL_OBJECTS =
 
 optimization: CMakeFiles/optimization.dir/main.cpp.o
+optimization: CMakeFiles/optimization.dir/draw_util.cpp.o
 optimization: CMakeFiles/optimization.dir/build.make
 optimization: /usr/local/lib/libceres.a
 optimization: /usr/lib/x86_64-linux-gnu/libglog.so
@@ -100,7 +126,8 @@ optimization: /usr/lib/x86_64-linux-gnu/libcamd.so
 optimization: /usr/lib/x86_64-linux-gnu/libcolamd.so
 optimization: /usr/lib/x86_64-linux-gnu/libamd.so
 optimization: /usr/lib/liblapack.so
-optimization: /usr/lib/libblas.so
+optimization: /usr/lib/libf77blas.so
+optimization: /usr/lib/libatlas.so
 optimization: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
 optimization: /usr/lib/x86_64-linux-gnu/librt.so
 optimization: /usr/lib/x86_64-linux-gnu/libcxsparse.so
@@ -111,12 +138,13 @@ optimization: /usr/lib/x86_64-linux-gnu/libcamd.so
 optimization: /usr/lib/x86_64-linux-gnu/libcolamd.so
 optimization: /usr/lib/x86_64-linux-gnu/libamd.so
 optimization: /usr/lib/liblapack.so
-optimization: /usr/lib/libblas.so
+optimization: /usr/lib/libf77blas.so
+optimization: /usr/lib/libatlas.so
 optimization: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
 optimization: /usr/lib/x86_64-linux-gnu/librt.so
 optimization: /usr/lib/x86_64-linux-gnu/libcxsparse.so
 optimization: CMakeFiles/optimization.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable optimization"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable optimization"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/optimization.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -125,6 +153,7 @@ CMakeFiles/optimization.dir/build: optimization
 .PHONY : CMakeFiles/optimization.dir/build
 
 CMakeFiles/optimization.dir/requires: CMakeFiles/optimization.dir/main.cpp.o.requires
+CMakeFiles/optimization.dir/requires: CMakeFiles/optimization.dir/draw_util.cpp.o.requires
 
 .PHONY : CMakeFiles/optimization.dir/requires
 
@@ -133,6 +162,6 @@ CMakeFiles/optimization.dir/clean:
 .PHONY : CMakeFiles/optimization.dir/clean
 
 CMakeFiles/optimization.dir/depend:
-	cd /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/wanghf/dev/momenta/sequence_optimization /home/wanghf/dev/momenta/sequence_optimization /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/CMakeFiles/optimization.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/wanghf/momenta/sequence_optimization/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/wanghf/momenta/sequence_optimization /home/wanghf/momenta/sequence_optimization /home/wanghf/momenta/sequence_optimization/cmake-build-debug /home/wanghf/momenta/sequence_optimization/cmake-build-debug /home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles/optimization.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/optimization.dir/depend
 

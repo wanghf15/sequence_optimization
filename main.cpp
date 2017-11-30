@@ -113,88 +113,132 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
  * @param truth
  * @param estimation
  */
-void showErrorStat(vector<double> truth, vector<double> estimation) {
-    double errors[5];
-    int error_count[5] = {0};
-    for (int i = 0; i < truth.size(); i++) {
-        if (truth[i] < 10) {
-            errors[0] += abs(truth[i] - estimation[i]) / truth[i];
-            error_count[0]++;
-        }
-        else if (truth[i] < 20) {
-            errors[1] += abs(truth[i] - estimation[i]) / truth[i];
-            error_count[1]++;
-        }
-        else if (truth[i] < 30) {
-            errors[2] += abs(truth[i] - estimation[i]) / truth[i];
-            error_count[2]++;
-        }
-        else {
-            errors[3] += abs(truth[i] - estimation[i]) / truth[i];
-            error_count[3]++;
+void showErrorStat(map<int,vector<double> > truth, map<int, vector<double> > estimation) {
+    double errors[10];
+    int error_count[10] = {0};
+    map<int, vector<double> >::iterator it;
+    for (it = truth.begin(); it != truth.end(); ++it) {
+        int trackid = it->first;
+        vector<double> depth_truth = it->second;
+        vector<double> depth_estimation = estimation[trackid];
+        for (int i = 0; i < depth_truth.size(); i++) {
+            if (depth_truth[i] < 10) {
+                errors[0] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[0]++;
+            }
+            else if (depth_truth[i] < 20) {
+                errors[1] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[1]++;
+            }
+            else if (depth_truth[i] < 30) {
+                errors[2] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[2]++;
+            }
+            else if (depth_truth[i] < 40) {
+                errors[3] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[3]++;
+            }
+            else if (depth_truth[i] < 50) {
+                errors[4] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[4]++;
+            }
+            else if (depth_truth[i] < 60) {
+                errors[5] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[5]++;
+            }
+            else if (depth_truth[i] < 70) {
+                errors[6] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[6]++;
+            }
+            else {
+                errors[7] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                error_count[7]++;
+            }
         }
     }
-    cout << "per error 0-10m : " << errors[0] / error_count[0] * 100.0 << "%" << endl;
-    cout << "per error 10-20m : " << errors[1] / error_count[1] * 100.0 << "%" << endl;
-    cout << "per error 20-30m : " << errors[2] / error_count[2] * 100.0 << "%" << endl;
-//    cout << "per error >30m : " << errors[3] / error_count[3] * 100.0 << "%" << endl;
+
+    for (int i = 0; i < 10; i++) {
+        cout << "per error : " << errors[i] / error_count[i] * 100.0 << "%" << endl;
+    }
+}
+
+vector<string> globVector(const string& pattern){
+    glob_t glob_result;
+    glob(pattern.c_str(), GLOB_TILDE, nullptr, &glob_result);
+
+    vector<string> files;
+    for(unsigned int i=0; i<glob_result.gl_pathc; ++i){
+        files.emplace_back(glob_result.gl_pathv[i]);
+    }
+
+    globfree(&glob_result);
+    return files;
 }
 
 int main(int argc, char** argv) {
+    double angle_input = 30;
 //    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
     google::InitGoogleLogging(argv[0]);
 
     // load data from json
-    string json_path = "/home/wanghf/momenta/1280_720.json";
+    string dataset_folder = "../data/tracklets/";
+    vector<string> json_path_list = globVector(dataset_folder + "*.json");
+    string json_path = "../data/tracklets.json";
     ifstream json_file(json_path);
     json json_frame;
     json_file >> json_frame;
     json_file.close();
 
-    json frames = json_frame["frames"];
-    vector<vector<double>> cuboid_2d;
-    vector<vector<double>> tailstock;
-    vector<vector<double>> tailstock_3d;
-    vector<vector<double>> gt_velocity;
-    vector<vector<double>> cuboid_3d;
-    vector<double> true_depth;
-    map observation_cars;
+    map<int, vector<vector<double>>> id_to_carframes;
+    map<int, vector<vector<double>>> id_to_carframes_3d;
+    map<int, vector<double>> id_to_estimation;
+    map<int, vector<double>> id_to_truth;
 
-    // only eval on forward car
-    bool side_view = false;
-    bool flat_road = true;
+    for (int clipidx = 0; clipidx < json_path_list.size(); clipidx++) {
+        string json_path = json_path_list[clipidx];
+        // cout << json_path << " clip index: " << clipidx << endl;
+        string json_name = json_path.substr(json_path.find_last_of("/\\") + 1);
+        string clip_name = json_name.substr(0, json_name.find_last_of('.'));
 
-    // iterate for each image
-    for (auto &frame : frames) {
-        json cars = frame["cars"];
-        vector<int> car_ids;
+        json tracklets;
+        ifstream json_file(json_path);
+        json_file >> tracklets;
+        json_file.close();
 
-        for (auto &car : cars) {
-            car_ids.push_back(car["trackid"]);
-        }
+        tracklets = tracklets["tracklets"];
 
-        // iterate for each car
-        for (auto &car : cars) {
-            int track_id_int = car["trackid"];
-//            double gt_yaw = car["gt_yaw"];
-//            double angle_range = M_PI / 6.0;
-//            if ((gt_yaw > angle_range && gt_yaw < M_PI_2 + angle_range) ||
-//                    (gt_yaw < -angle_range && gt_yaw > -M_PI_2 - angle_range)) {
-//                side_view = true;
-//            }
+        // iterate for each tracklet
+        for (auto it = tracklets.begin(); it != tracklets.end(); ++it) {
+            string track_id_str = it.key();
+            auto &frames = it.value();
+            if (track_id_str.length() == 0) {
+                continue;
+            }
 
-            vector<vector<double>> cur = car["cuboid_2d"];
-            vector<vector<double>> cur_3d = car["cuboid_3d"];
+            int track_id = stoi(track_id_str);
 
-            double gt_position[3] = {(cur_3d[0][0] + cur_3d[1][0] + cur_3d[2][0] + cur_3d[3][0]) / 4,
-                                     (cur_3d[0][1] + cur_3d[1][1] + cur_3d[2][1] + cur_3d[3][1]) / 4,
-                                     (cur_3d[0][2] + cur_3d[1][2] + cur_3d[2][2] + cur_3d[3][2]) / 4};
+            // only eval on forward car
+            bool side_view = false;
+            bool flat_road = true;
+            for (auto &frame : frames) {
+                if (track_id == 623385) {
+                    int a = 0;
+                }
+                float gt_yaw = frame["gt_yaw"];
+                vector<vector<float>> cuboid_3d = frame["cuboid_3d"];
+                double time_stamp = frame["time_stamp"];
+                vector<float> gt_velocity = frame["gt_velocity"];
 
-//            side_view = false;
-//            flat_road = true;
+                double angle_range = angle_input / 180.0 * M_PI;
+                if (gt_yaw > angle_range && gt_yaw < M_PI_2 + angle_range)
+                    side_view = true;
+                if (gt_yaw < -angle_range && gt_yaw > -M_PI_2 - angle_range)
+                    side_view = true;
 
+                double gt_position[3] = {(cuboid_3d[0][0] + cuboid_3d[1][0] + cuboid_3d[2][0] + cuboid_3d[3][0]) / 4,
+                                         (cuboid_3d[0][1] + cuboid_3d[1][1] + cuboid_3d[2][1] + cuboid_3d[3][1]) / 4,
+                                         (cuboid_3d[0][2] + cuboid_3d[1][2] + cuboid_3d[2][2] + cuboid_3d[3][2]) / 4};
 
-            if (track_id_int == 388889) {
                 double lateral_range = 5.0;
                 if (gt_position[0] > lateral_range || gt_position[0] < -lateral_range) {
                     side_view = true;
@@ -203,48 +247,86 @@ int main(int argc, char** argv) {
                 if (gt_position[1] > height_range + camera_height || gt_position[1] < camera_height - height_range) {
                     flat_road = false;
                 }
-
-                if (side_view || (!flat_road)) {
-                    continue;
-                }
-                for (vector<double> i : cur) {
-                    cuboid_2d.push_back(i);
-                }
-                for (vector<double> j : cur_3d) {
-                    cuboid_3d.push_back(j);
-                }
             }
 
-        } // end of cars
+            if (side_view || (!flat_road)) {
+                continue;
+            }
 
-    } // end of frames
+            // iterate for each frame
+            for (auto &frame : frames) {
+                vector<vector<double>> cur = frame["cuboid_2d"];
+                vector<vector<double>> cur_3d = frame["cuboid_3d"];
+
+                // first time to observe some car
+                if (id_to_carframes.count(track_id) == 0) {
+                    id_to_carframes[track_id] = cur;
+                    id_to_carframes_3d[track_id] = cur_3d;
+                }
+                else {
+                    vector<vector<double>> tmp = id_to_carframes[track_id];
+                    vector<vector<double>> tmp_3d = id_to_carframes_3d[track_id];
+                    for (vector<double> i : cur) {
+                        tmp.push_back(i);
+                    }
+                    id_to_carframes[track_id] = tmp;
+                    for (vector<double> i : cur_3d) {
+                        tmp_3d.push_back(i);
+                    }
+                    id_to_carframes_3d[track_id] = tmp_3d;
+                }
+
+            } // end of frames
+
+        } // end of tracklets
+
+        // iteration of car map
+        map<int, vector<vector<double >>>::iterator it;
+        for (it = id_to_carframes.begin(); it != id_to_carframes.end(); ++it) {
+            // tailstock, four points
+            vector<vector<double>> tailstock;
+
+            vector<double> depth_truth;
+            vector<double> depth_estimation;
+
+            int track_id = it->first;
+            vector<vector<double >> cuboid_2d = it->second;
+            vector<vector<double >> cuboid_3d = id_to_carframes_3d[track_id];
+
+            int image_cnt = (int) cuboid_2d.size() / 8;
+            if (image_cnt < window_length) {
+                continue;
+            }
+            for (int i = 0; i < image_cnt; i++) {
+                vector<double> temp;
+                // y
+                double y = (cuboid_2d[i * 8 + 2][1] + cuboid_2d[i * 8 + 1][1]) / 2 - static_foey;
+                temp.push_back(y);
+                // w
+                double w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
+                            cuboid_2d[i * 8 + 5][0] - cuboid_2d[i * 8 + 6][0]) / 2;
+                // ground truth depth
+                double depth = (cuboid_3d[i * 8 + 1][2] + cuboid_3d[i * 8 + 2][2] +
+                                cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
+                temp.push_back(w);
+
+                if (i >= 9) {
+                    depth_truth.push_back(depth);
+                }
+
+                tailstock.push_back(temp);
 
 
-    int image_cnt = (int) cuboid_2d.size() / 8;
-    for (int i = 0; i < image_cnt; i++) {
-        vector<double> temp;
-        // y
-        double y = (cuboid_2d[i * 8 + 2][1] + cuboid_2d[i * 8 + 1][1]) / 2 - static_foey;
-        temp.push_back(y);
-        // w
-        double w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
-                   cuboid_2d[i * 8 + 5][0] - cuboid_2d[i * 8 + 6][0]) / 2;
-        // ground truth depth
-        double depth = (cuboid_3d[i * 8 + 1][2] + cuboid_3d[i * 8 + 2][2] +
-                cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
-        temp.push_back(w);
-        if (i >= 9) {
-            true_depth.push_back(depth);
+            }
+
+            for (int j = window_length - 1; j < image_cnt; j++) {
+                depth_estimation.push_back(getCurrentDepth(tailstock, j));
+            }
+            id_to_estimation[track_id] = depth_estimation;
+            id_to_truth[track_id] = depth_truth;
         }
-
-
-        tailstock.push_back(temp);
     }
 
-    vector<double> depth_estimation;
-    for (int i = window_length - 1; i < image_cnt; i++) {
-        depth_estimation.push_back(getCurrentDepth(tailstock, i));
-    }
 
 //    for (int i = 0 ; i < true_depth.size(); i++) {
 //        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
@@ -252,7 +334,7 @@ int main(int argc, char** argv) {
 //             true_depth[i] << endl;
 //    }
 
-    showErrorStat(true_depth, depth_estimation);
+    showErrorStat(id_to_truth, id_to_estimation);
 
     return 0;
 }
