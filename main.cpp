@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <map>
 #include <glob.h>
 #include "ceres/ceres.h"
 #include "gflags/gflags.h"
@@ -112,9 +113,31 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
  * @param truth
  * @param estimation
  */
-void showStat(vector<double > truth, vector<double > estimation) {
+void showErrorStat(vector<double> truth, vector<double> estimation) {
     double errors[5];
-    cout << errors[0];
+    int error_count[5] = {0};
+    for (int i = 0; i < truth.size(); i++) {
+        if (truth[i] < 10) {
+            errors[0] += abs(truth[i] - estimation[i]) / truth[i];
+            error_count[0]++;
+        }
+        else if (truth[i] < 20) {
+            errors[1] += abs(truth[i] - estimation[i]) / truth[i];
+            error_count[1]++;
+        }
+        else if (truth[i] < 30) {
+            errors[2] += abs(truth[i] - estimation[i]) / truth[i];
+            error_count[2]++;
+        }
+        else {
+            errors[3] += abs(truth[i] - estimation[i]) / truth[i];
+            error_count[3]++;
+        }
+    }
+    cout << "per error 0-10m : " << errors[0] / error_count[0] * 100.0 << "%" << endl;
+    cout << "per error 10-20m : " << errors[1] / error_count[1] * 100.0 << "%" << endl;
+    cout << "per error 20-30m : " << errors[2] / error_count[2] * 100.0 << "%" << endl;
+//    cout << "per error >30m : " << errors[3] / error_count[3] * 100.0 << "%" << endl;
 }
 
 int main(int argc, char** argv) {
@@ -135,21 +158,55 @@ int main(int argc, char** argv) {
     vector<vector<double>> gt_velocity;
     vector<vector<double>> cuboid_3d;
     vector<double> true_depth;
+    map observation_cars;
+
+    // only eval on forward car
+    bool side_view = false;
+    bool flat_road = true;
 
     // iterate for each image
     for (auto &frame : frames) {
         json cars = frame["cars"];
+        vector<int> car_ids;
+
+        for (auto &car : cars) {
+            car_ids.push_back(car["trackid"]);
+        }
 
         // iterate for each car
         for (auto &car : cars) {
-//            cout << car["trackid"] << endl;
             int track_id_int = car["trackid"];
-
+//            double gt_yaw = car["gt_yaw"];
+//            double angle_range = M_PI / 6.0;
+//            if ((gt_yaw > angle_range && gt_yaw < M_PI_2 + angle_range) ||
+//                    (gt_yaw < -angle_range && gt_yaw > -M_PI_2 - angle_range)) {
+//                side_view = true;
+//            }
 
             vector<vector<double>> cur = car["cuboid_2d"];
             vector<vector<double>> cur_3d = car["cuboid_3d"];
 
+            double gt_position[3] = {(cur_3d[0][0] + cur_3d[1][0] + cur_3d[2][0] + cur_3d[3][0]) / 4,
+                                     (cur_3d[0][1] + cur_3d[1][1] + cur_3d[2][1] + cur_3d[3][1]) / 4,
+                                     (cur_3d[0][2] + cur_3d[1][2] + cur_3d[2][2] + cur_3d[3][2]) / 4};
+
+//            side_view = false;
+//            flat_road = true;
+
+
             if (track_id_int == 388889) {
+                double lateral_range = 5.0;
+                if (gt_position[0] > lateral_range || gt_position[0] < -lateral_range) {
+                    side_view = true;
+                }
+                double height_range = 0.5;
+                if (gt_position[1] > height_range + camera_height || gt_position[1] < camera_height - height_range) {
+                    flat_road = false;
+                }
+
+                if (side_view || (!flat_road)) {
+                    continue;
+                }
                 for (vector<double> i : cur) {
                     cuboid_2d.push_back(i);
                 }
@@ -189,16 +246,13 @@ int main(int argc, char** argv) {
         depth_estimation.push_back(getCurrentDepth(tailstock, i));
     }
 
-    double errors[3];
-    int count = 0;
-    for (int i = 0 ; i < true_depth.size(); i++) {
+//    for (int i = 0 ; i < true_depth.size(); i++) {
 //        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
 //             << setprecision(2) << (true_depth[i] - depth_estimation[i]) / true_depth[i] * 100.0 << "%" << "," <<
 //             true_depth[i] << endl;
-    }
+//    }
 
-    showStat(true_depth, depth_estimation);
-
+    showErrorStat(true_depth, depth_estimation);
 
     return 0;
 }
