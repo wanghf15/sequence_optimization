@@ -37,8 +37,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="optimization">
-				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
+			<Target title="ls_optimization">
+				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/ls_optimization" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -55,14 +55,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 ls_optimization"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="optimization/fast">
-				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
+			<Target title="ls_optimization/fast">
+				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/ls_optimization" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -79,7 +79,7 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 ls_optimization/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -87,16 +87,37 @@
 			</Target>
 		</Build>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/draw_util.cpp">
-			<Option target="optimization"/>
+			<Option target="ls_optimization"/>
 		</Unit>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/draw_util.h">
-			<Option target="optimization"/>
+			<Option target="ls_optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/json.h">
-			<Option target="optimization"/>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/include/log_error_info.cpp">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/include/ls_optimization.cpp">
+			<Option target="ls_optimization"/>
 		</Unit>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/main.cpp">
-			<Option target="optimization"/>
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/cost_function.h">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/json.h">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/log_error_info.h">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/ls_optimization.h">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/system_parameters.h">
+			<Option target="ls_optimization"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/utils.h">
+			<Option target="ls_optimization"/>
 		</Unit>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

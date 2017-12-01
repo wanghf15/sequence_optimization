@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named optimization
+# Target rules for targets named ls_optimization
 
 # Build rule for target.
-optimization: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 optimization
-.PHONY : optimization
+ls_optimization: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ls_optimization
+.PHONY : ls_optimization
 
 # fast build rule for target.
-optimization/fast:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/build
-.PHONY : optimization/fast
+ls_optimization/fast:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/build
+.PHONY : ls_optimization/fast
 
 draw_util.o: draw_util.cpp.o
 
@@ -129,7 +129,7 @@ draw_util.o: draw_util.cpp.o
 
 # target to build an object file
 draw_util.cpp.o:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.o
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/draw_util.cpp.o
 .PHONY : draw_util.cpp.o
 
 draw_util.i: draw_util.cpp.i
@@ -138,7 +138,7 @@ draw_util.i: draw_util.cpp.i
 
 # target to preprocess a source file
 draw_util.cpp.i:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.i
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/draw_util.cpp.i
 .PHONY : draw_util.cpp.i
 
 draw_util.s: draw_util.cpp.s
@@ -147,8 +147,62 @@ draw_util.s: draw_util.cpp.s
 
 # target to generate assembly for a file
 draw_util.cpp.s:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/draw_util.cpp.s
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/draw_util.cpp.s
 .PHONY : draw_util.cpp.s
+
+include/log_error_info.o: include/log_error_info.cpp.o
+
+.PHONY : include/log_error_info.o
+
+# target to build an object file
+include/log_error_info.cpp.o:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o
+.PHONY : include/log_error_info.cpp.o
+
+include/log_error_info.i: include/log_error_info.cpp.i
+
+.PHONY : include/log_error_info.i
+
+# target to preprocess a source file
+include/log_error_info.cpp.i:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.i
+.PHONY : include/log_error_info.cpp.i
+
+include/log_error_info.s: include/log_error_info.cpp.s
+
+.PHONY : include/log_error_info.s
+
+# target to generate assembly for a file
+include/log_error_info.cpp.s:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.s
+.PHONY : include/log_error_info.cpp.s
+
+include/ls_optimization.o: include/ls_optimization.cpp.o
+
+.PHONY : include/ls_optimization.o
+
+# target to build an object file
+include/ls_optimization.cpp.o:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o
+.PHONY : include/ls_optimization.cpp.o
+
+include/ls_optimization.i: include/ls_optimization.cpp.i
+
+.PHONY : include/ls_optimization.i
+
+# target to preprocess a source file
+include/ls_optimization.cpp.i:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.i
+.PHONY : include/ls_optimization.cpp.i
+
+include/ls_optimization.s: include/ls_optimization.cpp.s
+
+.PHONY : include/ls_optimization.s
+
+# target to generate assembly for a file
+include/ls_optimization.cpp.s:
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.s
+.PHONY : include/ls_optimization.cpp.s
 
 main.o: main.cpp.o
 
@@ -156,7 +210,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/main.cpp.o
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -165,7 +219,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/main.cpp.i
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -174,7 +228,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) -f CMakeFiles/optimization.dir/build.make CMakeFiles/optimization.dir/main.cpp.s
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 # Help Target
@@ -185,10 +239,16 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... optimization"
+	@echo "... ls_optimization"
 	@echo "... draw_util.o"
 	@echo "... draw_util.i"
 	@echo "... draw_util.s"
+	@echo "... include/log_error_info.o"
+	@echo "... include/log_error_info.i"
+	@echo "... include/log_error_info.s"
+	@echo "... include/ls_optimization.o"
+	@echo "... include/ls_optimization.i"
+	@echo "... include/ls_optimization.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

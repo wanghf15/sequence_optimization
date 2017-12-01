@@ -3,166 +3,26 @@
 #include <fstream>
 #include <map>
 #include <glob.h>
-#include "ceres/ceres.h"
-#include "gflags/gflags.h"
-#include "glog/logging.h"
-#include "json.h"
+#include <chrono>
+#include "src/json.h"
+#include "src/system_parameters.h"
+#include "src/ls_optimization.h"
+#include "src/log_error_info.h"
 
 using json = nlohmann::json;
-using ceres::AutoDiffCostFunction;
-using ceres::CostFunction;
-using ceres::Problem;
-using ceres::Solver;
-using ceres::Solve;
 using namespace std;
+using namespace sequence_optimization;
 
-struct DepthResidual {
-    DepthResidual(double w, double f) : w_(w), f_(f){};
-
-    template <typename T> bool operator()(const T* const depth,
-                                          const T* const real_width, T* residual) const {
-        residual[0] = (depth[0] - real_width[0] / w_ * f_);
-        return true;
-    }
-
-private:
-    const double w_;
-    const double f_;
-};
-
-struct RealWidthResidual {
-    RealWidthResidual(double hc, double w, double y) : hc_(hc), w_(w), y_(y){};
-
-    template <typename T> bool operator()(const T*const real_width, T* residual) const {
-        residual[0] = 5.0 * (hc_ * w_ / y_ - real_width[0]);
-        return true;
-    }
-
-private:
-    const double hc_;
-    const double w_;
-    const double y_;
-};
-
-struct VelocityResidual {
-    template <typename T> bool operator()(const T*const x2, const T*const x1,
-                                          const T*const x0, T* residual) const {
-        residual[0] = 10.0 * (x2[0] - 2.0 * x1[0] + x0[0]);
-        return true;
-    }
-};
-
-DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
-
-// init car manager
-double focal_len = 623.5383;
-double camera_height = 1.5165;
-double static_foex = 640;
-double static_foey = 360;
-int window_length = 11;
-
-double getCurrentDepth(vector<vector<double>> obs, int end_index) {
-    // x1~xn, w
-    vector<double> optimization_vars;
-
-    if (end_index == 191) {
-        cout << "a" << endl;
-    }
-
-    for (int i = 0; i < window_length; i++) {
-        optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1 + i][0] - static_foey) * focal_len);
-        if (i == window_length - 1) {
-            optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1][0] - static_foey)
-                                        * obs[end_index - window_length + 1][1]);
-        }
-    }
-
-    Problem problem;
-
-    for (int i = 0; i < window_length; i++) {
-        problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
-                new DepthResidual(obs[end_index - window_length + 1 + i][1], focal_len)), NULL,
-                                 &optimization_vars[i], &optimization_vars[window_length]);
-        problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
-                new RealWidthResidual(camera_height, obs[end_index - window_length + 1 + i][1],
-                                      obs[end_index - window_length + 1 + i][0])), NULL, &optimization_vars[window_length]);
-        if (i < window_length - 2) {
-            problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
-                    new VelocityResidual), NULL, &optimization_vars[i + 2], &optimization_vars[i + 1], &optimization_vars[i]);
-        }
-    }
-
-    Solver::Options options;
-    LOG_IF(FATAL, !ceres::StringToMinimizerType(FLAGS_minimizer, &options.minimizer_type))
-           << "Invalid minimizer : " << FLAGS_minimizer << ", valid options are : trust_region and line_search.";
-
-    options.max_num_iterations = 100;
-    options.linear_solver_type = ceres::DENSE_QR;
-    options.minimizer_progress_to_stdout = true;
-
-    Solver::Summary summary;
-    Solve(options, &problem, &summary);
-
-//    cout << summary.FullReport();
-
-    return optimization_vars[window_length - 1];
+std::chrono::high_resolution_clock::time_point inline get_now() {
+    return std::chrono::high_resolution_clock::now();
 }
 
-/**
- * 统计各个区间误差分布，并打印
- * @param truth
- * @param estimation
- */
-void showErrorStat(map<int,vector<double> > truth, map<int, vector<double> > estimation) {
-    double errors[10];
-    int error_count[10] = {0};
-    map<int, vector<double> >::iterator it;
-    for (it = truth.begin(); it != truth.end(); ++it) {
-        int trackid = it->first;
-        vector<double> depth_truth = it->second;
-        vector<double> depth_estimation = estimation[trackid];
-        for (int i = 0; i < depth_truth.size(); i++) {
-            if (depth_truth[i] < 10) {
-                errors[0] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[0]++;
-            }
-            else if (depth_truth[i] < 20) {
-                errors[1] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[1]++;
-            }
-            else if (depth_truth[i] < 30) {
-                errors[2] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[2]++;
-            }
-            else if (depth_truth[i] < 40) {
-                errors[3] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[3]++;
-            }
-            else if (depth_truth[i] < 50) {
-                errors[4] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[4]++;
-            }
-            else if (depth_truth[i] < 60) {
-                errors[5] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[5]++;
-            }
-            else if (depth_truth[i] < 70) {
-                errors[6] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[6]++;
-            }
-            else {
-                errors[7] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
-                error_count[7]++;
-            }
-        }
-    }
-
-    for (int i = 0; i < 10; i++) {
-        cout << "per error : " << errors[i] / error_count[i] * 100.0 << "%" << endl;
-    }
+double inline get_duration(std::chrono::high_resolution_clock::time_point& start,
+                           std::chrono::high_resolution_clock::time_point& end) {
+    return std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 }
 
-vector<string> globVector(const string& pattern){
+vector<string> globVector(const string& pattern) {
     glob_t glob_result;
     glob(pattern.c_str(), GLOB_TILDE, nullptr, &glob_result);
 
@@ -176,6 +36,9 @@ vector<string> globVector(const string& pattern){
 }
 
 int main(int argc, char** argv) {
+    LeastSquareOptimization leastSquareOptimization;
+    Log_Error_Info logger;
+
     double angle_input = 30;
 //    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
     google::InitGoogleLogging(argv[0]);
@@ -315,26 +178,22 @@ int main(int argc, char** argv) {
                 }
 
                 tailstock.push_back(temp);
-
-
             }
 
+
             for (int j = window_length - 1; j < image_cnt; j++) {
-                depth_estimation.push_back(getCurrentDepth(tailstock, j));
+//                auto start = get_now();
+                depth_estimation.push_back(leastSquareOptimization.getDepthEstimation(tailstock, j));
+//                auto end = get_now();
+                // time consuming
+//                cout << "time_cost : " << get_duration(start, end) << endl;
             }
             id_to_estimation[track_id] = depth_estimation;
             id_to_truth[track_id] = depth_truth;
         }
     }
 
-
-//    for (int i = 0 ; i < true_depth.size(); i++) {
-//        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
-//             << setprecision(2) << (true_depth[i] - depth_estimation[i]) / true_depth[i] * 100.0 << "%" << "," <<
-//             true_depth[i] << endl;
-//    }
-
-    showErrorStat(id_to_truth, id_to_estimation);
+    logger.showErrorStat(id_to_truth, id_to_estimation);
 
     return 0;
 }
