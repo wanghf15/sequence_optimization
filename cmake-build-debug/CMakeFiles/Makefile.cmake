@@ -43,6 +43,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/local/lib/cmake/Ceres/FindEigen.cmake"
   "/usr/local/lib/cmake/Ceres/FindGflags.cmake"
   "/usr/local/lib/cmake/Ceres/FindGlog.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig-version.cmake"
+  "/usr/local/share/OpenCV/OpenCVConfig.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules-release.cmake"
+  "/usr/local/share/OpenCV/OpenCVModules.cmake"
   )
 
 # The corresponding makefile is:

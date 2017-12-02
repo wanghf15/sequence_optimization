@@ -22,13 +22,45 @@ using ceres::Solver;
 using ceres::Solve;
 
 namespace sequence_optimization {
-//    DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
     class LeastSquareOptimization {
-
     public:
         vector<double> getEstimationResult(vector<vector<double>> obs, int end_index);
+        double getEstimationResultDepth(vector<vector<double>> obs, int end_index);
 
     }; // end of class
+
+    class Object3d {
+    public:
+        Object3d();
+        int track_id_;
+
+        // size
+        float length_;
+        float width_;
+        float height_;
+
+        // car attributes
+        int cls_type_minor_;
+
+        // location
+        float position_x_;
+        float position_y_;
+        float theta_;
+        float pos_x_sigma_;
+        float pos_y_sigma_;
+        float theta_sigma_;
+
+        // speed
+        float speed_x_;
+        float speed_y_;
+        float speed_x_sigma_;
+        float speed_y_sigma_;
+
+        // adas functions
+        float ttc_;
+        float hmw_;
+        bool is_dangerous_;
+    };
 
 } // end of namespace
 

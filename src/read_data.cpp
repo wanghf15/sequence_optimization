@@ -67,6 +67,7 @@ namespace sequence_optimization {
                             (cuboid_3d[0][0] + cuboid_3d[1][0] + cuboid_3d[2][0] + cuboid_3d[3][0]) / 4,
                             (cuboid_3d[0][1] + cuboid_3d[1][1] + cuboid_3d[2][1] + cuboid_3d[3][1]) / 4,
                             (cuboid_3d[0][2] + cuboid_3d[1][2] + cuboid_3d[2][2] + cuboid_3d[3][2]) / 4};
+
                     if (utils.isValidData(gt_yaw, gt_position)) {
                         valid_data = false;
                         break;
@@ -108,7 +109,6 @@ namespace sequence_optimization {
             for (it = id_to_carframes.begin(); it != id_to_carframes.end(); ++it) {
                 vector<vector<double >> tailstock;
 
-                vector<double> ground_truth;
                 vector<vector<double >> estimation;
 
                 int track_id = it->first;
@@ -136,13 +136,12 @@ namespace sequence_optimization {
                                     cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
                     temp.push_back(w);
 
-                    if (i >= window_length - 1) {
-                        ground_truth.push_back(depth);
-                    }
+                    temp.push_back(depth);
 
                     tailstock.push_back(temp);
                 } //end of image
 
+                // 每帧数据包括 x,y,w,true_depth
                 measurements[track_id] = tailstock;
 
             } // end of tracklets

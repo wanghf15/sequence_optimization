@@ -6,5 +6,5 @@ CXX_FLAGS = -g   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/wanghf/momenta/sequence_optimization/include -I/usr/local/include -I/usr/include/eigen3 
+CXX_INCLUDES = -I/home/wanghf/momenta/sequence_optimization/include -isystem /usr/local/include -I/usr/include/eigen3 -isystem /usr/local/include/opencv 
 

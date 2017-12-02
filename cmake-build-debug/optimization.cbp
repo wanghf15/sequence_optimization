@@ -5,7 +5,7 @@
 		<Option title="optimization"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\eigen3\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\eigen3\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
@@ -47,6 +47,7 @@
 					<Add directory="/home/wanghf/momenta/sequence_optimization/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -72,6 +73,7 @@
 					<Add directory="/home/wanghf/momenta/sequence_optimization/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
+					<Add directory="/usr/local/include/opencv"/>
 					<Add directory="/usr/include/c++/5"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
 					<Add directory="/usr/include/c++/5/backward"/>
@@ -126,6 +128,18 @@
 		</Unit>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/CeresTargets-release.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		</Unit>
+		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
 		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/lib/cmake/eigen3/Eigen3Config.cmake">
 			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\eigen3\"/>
