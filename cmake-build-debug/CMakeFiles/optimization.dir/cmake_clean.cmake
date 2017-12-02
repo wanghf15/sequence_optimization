@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/optimization.dir/main.cpp.o"
-  "CMakeFiles/optimization.dir/draw_util.cpp.o"
-  "CMakeFiles/optimization.dir/include/ls_optimization.cpp.o"
+  "CMakeFiles/optimization.dir/src/log_error_info.cpp.o"
+  "CMakeFiles/optimization.dir/src/ls_optimization.cpp.o"
+  "CMakeFiles/optimization.dir/src/main.cpp.o"
+  "CMakeFiles/optimization.dir/src/read_data.cpp.o"
+  "CMakeFiles/optimization.dir/src/utils.cpp.o"
   "optimization.pdb"
   "optimization"
 )

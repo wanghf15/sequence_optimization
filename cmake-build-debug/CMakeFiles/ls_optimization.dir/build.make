@@ -57,144 +57,117 @@ include CMakeFiles/ls_optimization.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ls_optimization.dir/flags.make
 
-CMakeFiles/ls_optimization.dir/main.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
-CMakeFiles/ls_optimization.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ls_optimization.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/main.cpp.o -c /home/wanghf/momenta/sequence_optimization/main.cpp
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o: ../src/log_error_info.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o -c /home/wanghf/momenta/sequence_optimization/src/log_error_info.cpp
 
-CMakeFiles/ls_optimization.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/main.cpp > CMakeFiles/ls_optimization.dir/main.cpp.i
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/src/log_error_info.cpp > CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.i
 
-CMakeFiles/ls_optimization.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/main.cpp -o CMakeFiles/ls_optimization.dir/main.cpp.s
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/src/log_error_info.cpp -o CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.s
 
-CMakeFiles/ls_optimization.dir/main.cpp.o.requires:
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.requires:
 
-.PHONY : CMakeFiles/ls_optimization.dir/main.cpp.o.requires
+.PHONY : CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.requires
 
-CMakeFiles/ls_optimization.dir/main.cpp.o.provides: CMakeFiles/ls_optimization.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/ls_optimization.dir/main.cpp.o.provides
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.provides: CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.provides.build
+.PHONY : CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.provides
 
-CMakeFiles/ls_optimization.dir/main.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/main.cpp.o
-
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
-CMakeFiles/ls_optimization.dir/draw_util.cpp.o: ../draw_util.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ls_optimization.dir/draw_util.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/draw_util.cpp.o -c /home/wanghf/momenta/sequence_optimization/draw_util.cpp
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/draw_util.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/draw_util.cpp > CMakeFiles/ls_optimization.dir/draw_util.cpp.i
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/draw_util.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/draw_util.cpp -o CMakeFiles/ls_optimization.dir/draw_util.cpp.s
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.o.requires:
-
-.PHONY : CMakeFiles/ls_optimization.dir/draw_util.cpp.o.requires
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.o.provides: CMakeFiles/ls_optimization.dir/draw_util.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/draw_util.cpp.o.provides.build
-.PHONY : CMakeFiles/ls_optimization.dir/draw_util.cpp.o.provides
-
-CMakeFiles/ls_optimization.dir/draw_util.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/draw_util.cpp.o
+CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o
 
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o: ../include/ls_optimization.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o -c /home/wanghf/momenta/sequence_optimization/include/ls_optimization.cpp
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o: ../src/ls_optimization.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o -c /home/wanghf/momenta/sequence_optimization/src/ls_optimization.cpp
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/include/ls_optimization.cpp > CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.i
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/src/ls_optimization.cpp > CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.i
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/include/ls_optimization.cpp -o CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.s
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/src/ls_optimization.cpp -o CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.s
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.requires:
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.requires:
 
-.PHONY : CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.requires
+.PHONY : CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.requires
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.provides: CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.provides.build
-.PHONY : CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.provides
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.provides: CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.provides.build
+.PHONY : CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.provides
 
-CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o
+CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o
 
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o: ../include/log_error_info.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o -c /home/wanghf/momenta/sequence_optimization/include/log_error_info.cpp
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.o: ../src/read_data.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ls_optimization.dir/src/read_data.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/src/read_data.cpp.o -c /home/wanghf/momenta/sequence_optimization/src/read_data.cpp
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/include/log_error_info.cpp > CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.i
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/src/read_data.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/src/read_data.cpp > CMakeFiles/ls_optimization.dir/src/read_data.cpp.i
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/include/log_error_info.cpp -o CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.s
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/src/read_data.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/src/read_data.cpp -o CMakeFiles/ls_optimization.dir/src/read_data.cpp.s
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.requires:
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.requires:
 
-.PHONY : CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.requires
+.PHONY : CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.requires
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.provides: CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.requires
-	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.provides.build
-.PHONY : CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.provides
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.provides: CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.provides.build
+.PHONY : CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.provides
 
-CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o
+CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/src/read_data.cpp.o
+
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.o: CMakeFiles/ls_optimization.dir/flags.make
+CMakeFiles/ls_optimization.dir/src/utils.cpp.o: ../src/utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ls_optimization.dir/src/utils.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ls_optimization.dir/src/utils.cpp.o -c /home/wanghf/momenta/sequence_optimization/src/utils.cpp
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ls_optimization.dir/src/utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/wanghf/momenta/sequence_optimization/src/utils.cpp > CMakeFiles/ls_optimization.dir/src/utils.cpp.i
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ls_optimization.dir/src/utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/wanghf/momenta/sequence_optimization/src/utils.cpp -o CMakeFiles/ls_optimization.dir/src/utils.cpp.s
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.o.requires:
+
+.PHONY : CMakeFiles/ls_optimization.dir/src/utils.cpp.o.requires
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.o.provides: CMakeFiles/ls_optimization.dir/src/utils.cpp.o.requires
+	$(MAKE) -f CMakeFiles/ls_optimization.dir/build.make CMakeFiles/ls_optimization.dir/src/utils.cpp.o.provides.build
+.PHONY : CMakeFiles/ls_optimization.dir/src/utils.cpp.o.provides
+
+CMakeFiles/ls_optimization.dir/src/utils.cpp.o.provides.build: CMakeFiles/ls_optimization.dir/src/utils.cpp.o
 
 
 # Object files for target ls_optimization
 ls_optimization_OBJECTS = \
-"CMakeFiles/ls_optimization.dir/main.cpp.o" \
-"CMakeFiles/ls_optimization.dir/draw_util.cpp.o" \
-"CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o" \
-"CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o"
+"CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o" \
+"CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o" \
+"CMakeFiles/ls_optimization.dir/src/read_data.cpp.o" \
+"CMakeFiles/ls_optimization.dir/src/utils.cpp.o"
 
 # External object files for target ls_optimization
 ls_optimization_EXTERNAL_OBJECTS =
 
-ls_optimization: CMakeFiles/ls_optimization.dir/main.cpp.o
-ls_optimization: CMakeFiles/ls_optimization.dir/draw_util.cpp.o
-ls_optimization: CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o
-ls_optimization: CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o
+ls_optimization: CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o
+ls_optimization: CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o
+ls_optimization: CMakeFiles/ls_optimization.dir/src/read_data.cpp.o
+ls_optimization: CMakeFiles/ls_optimization.dir/src/utils.cpp.o
 ls_optimization: CMakeFiles/ls_optimization.dir/build.make
-ls_optimization: /usr/local/lib/libceres.a
-ls_optimization: /usr/lib/x86_64-linux-gnu/libglog.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libgflags.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libspqr.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcholmod.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libccolamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcolamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libamd.so
-ls_optimization: /usr/lib/liblapack.so
-ls_optimization: /usr/lib/libf77blas.so
-ls_optimization: /usr/lib/libatlas.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/librt.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcxsparse.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libspqr.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcholmod.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libccolamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcolamd.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libamd.so
-ls_optimization: /usr/lib/liblapack.so
-ls_optimization: /usr/lib/libf77blas.so
-ls_optimization: /usr/lib/libatlas.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/librt.so
-ls_optimization: /usr/lib/x86_64-linux-gnu/libcxsparse.so
 ls_optimization: CMakeFiles/ls_optimization.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/wanghf/momenta/sequence_optimization/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable ls_optimization"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ls_optimization.dir/link.txt --verbose=$(VERBOSE)
@@ -204,10 +177,10 @@ CMakeFiles/ls_optimization.dir/build: ls_optimization
 
 .PHONY : CMakeFiles/ls_optimization.dir/build
 
-CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/main.cpp.o.requires
-CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/draw_util.cpp.o.requires
-CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/include/ls_optimization.cpp.o.requires
-CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/include/log_error_info.cpp.o.requires
+CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o.requires
+CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o.requires
+CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/src/read_data.cpp.o.requires
+CMakeFiles/ls_optimization.dir/requires: CMakeFiles/ls_optimization.dir/src/utils.cpp.o.requires
 
 .PHONY : CMakeFiles/ls_optimization.dir/requires
 

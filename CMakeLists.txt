@@ -4,8 +4,14 @@ project(optimization)
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(Ceres REQUIRED)
-include_directories(${CERES_INCLUDE_DIRS})
+include_directories(include ${CERES_INCLUDE_DIRS})
 
-set(SOURCE_FILES main.cpp src/json.h draw_util.cpp draw_util.h src/utils.h include/ls_optimization.cpp src/ls_optimization.h src/system_parameters.h include/log_error_info.cpp src/log_error_info.h src/cost_function.h)
-add_executable(ls_optimization ${SOURCE_FILES})
-target_link_libraries(ls_optimization ${CERES_LIBRARIES})
+AUX_SOURCE_DIRECTORY(src DIR_SRCS)
+#file(GLOB SOURCES src/*.cpp)
+#add_library(optimization ${SOURCES})
+
+#set(SOURCE ${DIR_SRCS})
+add_executable(${PROJECT_NAME} ${DIR_SRCS})
+target_link_libraries(${PROJECT_NAME} ${CERES_LIBRARIES})
+
+
