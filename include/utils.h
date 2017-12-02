@@ -50,6 +50,11 @@ namespace sequence_optimization {
         double lateral_range = 5.0;
         double height_range = 0.5;
     };
+
+    class Foo {
+    private:
+        int a = 0;
+    };
 }
 
 #endif //OPTIMIZATION_UTILS_H

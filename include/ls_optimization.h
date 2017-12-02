@@ -31,7 +31,6 @@ namespace sequence_optimization {
 
     class Object3d {
     public:
-        Object3d();
         int track_id_;
 
         // size

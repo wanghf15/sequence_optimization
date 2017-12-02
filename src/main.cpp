@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     const float depth_bot = -2.f;
     const float lateral_half_range = 10.f;
     cv::Mat bvImg = cv::Mat::zeros(800, 300, CV_8UC3);
-    sequence_optimization::Object3d object3d;
+    Object3d object3d;
     object3d.length_= 5.0;
     object3d.width_ = 2;
     object3d.position_y_ = 2;
@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
     vector<Object3d> right_lmk;
     utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
     cv::imshow("bv", bvImg);
+    cvWaitKey(0);
 
     return 0;
 }
