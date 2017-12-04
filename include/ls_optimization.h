@@ -29,8 +29,7 @@ namespace sequence_optimization {
 
     }; // end of class
 
-    class Object3d {
-    public:
+    struct CarObject {
         int track_id_;
 
         // size

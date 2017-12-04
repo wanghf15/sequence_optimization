@@ -43,7 +43,7 @@ namespace sequence_optimization {
          * @param half_lateral_range
          * @param cloud
          */
-        void draw_bird_view(cv::Mat visImg, const std::vector<sequence_optimization::Object3d> &objs,
+        void draw_bird_view(cv::Mat visImg, const std::vector<sequence_optimization::CarObject> &objs,
                             const float depth_bot, const float half_lateral_range);
     private:
         double angle_range = 30.0;

@@ -45,7 +45,7 @@ namespace sequence_optimization {
         return cv::Point(- tmp.y + bot_center_img.x, bot_center_img.y - tmp.x);
     }
 
-    void Utils::draw_bird_view(cv::Mat visImg, const std::vector<sequence_optimization::Object3d> &objs,
+    void Utils::draw_bird_view(cv::Mat visImg, const std::vector<sequence_optimization::CarObject> &objs,
                         const float depth_bot, const float half_lateral_range) {
         const double scale = visImg.cols / (half_lateral_range * 2.f);
         const double range_longitude = visImg.rows / scale;
@@ -65,7 +65,7 @@ namespace sequence_optimization {
         cv::Scalar color;
         // draw car box
         for (int i = 0; i < objs.size(); ++i) {
-            const sequence_optimization::Object3d &obj = objs[i];
+            const sequence_optimization::CarObject &obj = objs[i];
             const double x0 = obj.position_x_;
             const double y0 = obj.position_y_;
             const double l_half = obj.length_ / 2;

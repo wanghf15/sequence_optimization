@@ -20,7 +20,8 @@ int main(int argc, char** argv) {
 
     string dataset_folder = "../data/tracklets/";
     map<int, vector<vector<double >>> estimation_result;
-    map<int, vector<vector<double >>> measurements = jsonReader.read_by_tracklets_from_path(dataset_folder);
+//    map<int, vector<vector<double >>> measurements = jsonReader.read_by_tracklets_from_path(dataset_folder);
+    map<int, vector<vector<double >>> measurements = jsonReader.read_by_frames_from_path("../data/frames/");
     map<int, vector<double >> ground_truth;
 
     for (auto it = measurements.begin(); it != measurements.end(); ++it) {
@@ -47,36 +48,35 @@ int main(int argc, char** argv) {
     logger.showErrorStat(ground_truth, estimation_result);
 
     //画图
-    const float depth_bot = -2.f;
-    const float lateral_half_range = 10.f;
-    cv::Mat bvImg = cv::Mat::zeros(800, 300, CV_8UC3);
-
-    Object3d object3d;
-    vector<double> test_truth = ground_truth.begin()->second;
-    vector<vector<double>> test_estimation = estimation_result.begin()->second;
-    object3d.length_= 5.0;
-    object3d.width_ = 2;
-    object3d.position_y_ = 2;
-    object3d.theta_ = 0.1;
-    for (int i = 0; i < test_truth.size(); i++) {
-        bvImg.setTo(cv::Scalar(0, 0, 0));
-        if (test_truth[i] < 40) {
-            object3d.position_x_ = test_truth[i];
-            object3d.track_id_ = -1;
-            vector<Object3d> left_lmk;
-            left_lmk.push_back(object3d);
-            object3d.track_id_ = 1;
-            object3d.position_x_ = test_estimation[i][0];
-            vector<Object3d> right_lmk;
-            right_lmk.push_back(object3d);
-            utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
-            utils.draw_bird_view(bvImg, right_lmk, depth_bot, lateral_half_range);
-            cv::imshow("bv", bvImg);
-            cvWaitKey(0);
-//            break;
-        }
-
-    }
+//    const float depth_bot = -2.f;
+//    const float lateral_half_range = 10.f;
+//    cv::Mat bvImg = cv::Mat::zeros(800, 300, CV_8UC3);
+//
+//    CarObject object3d;
+//    vector<double> test_truth = ground_truth.begin()->second;
+//    vector<vector<double>> test_estimation = estimation_result.begin()->second;
+//    object3d.length_= 5.0;
+//    object3d.width_ = 2;
+//    object3d.position_y_ = 2;
+//    object3d.theta_ = 0.1;
+//    for (int i = 0; i < test_truth.size(); i++) {
+//        bvImg.setTo(cv::Scalar(0, 0, 0));
+//        if (test_truth[i] < 40) {
+//            object3d.position_x_ = test_truth[i];
+//            object3d.track_id_ = -1;
+//            vector<CarObject> left_lmk;
+//            left_lmk.push_back(object3d);
+//            object3d.track_id_ = 1;
+//            object3d.position_x_ = test_estimation[i][0];
+//            vector<CarObject> right_lmk;
+//            right_lmk.push_back(object3d);
+//            utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
+//            utils.draw_bird_view(bvImg, right_lmk, depth_bot, lateral_half_range);
+//            cv::imshow("bv", bvImg);
+//            cvWaitKey(0);
+//        }
+//
+//    }
 
 
     return 0;
