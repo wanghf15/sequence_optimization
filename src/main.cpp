@@ -50,18 +50,34 @@ int main(int argc, char** argv) {
     const float depth_bot = -2.f;
     const float lateral_half_range = 10.f;
     cv::Mat bvImg = cv::Mat::zeros(800, 300, CV_8UC3);
+
     Object3d object3d;
+    vector<double> test_truth = ground_truth.begin()->second;
+    vector<vector<double>> test_estimation = estimation_result.begin()->second;
     object3d.length_= 5.0;
     object3d.width_ = 2;
     object3d.position_y_ = 2;
-    object3d.position_x_ = 20;
     object3d.theta_ = 0.1;
-    vector<Object3d> left_lmk;
-    left_lmk.push_back(object3d);
-    vector<Object3d> right_lmk;
-    utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
-    cv::imshow("bv", bvImg);
-    cvWaitKey(0);
+    for (int i = 0; i < test_truth.size(); i++) {
+        bvImg.setTo(cv::Scalar(0, 0, 0));
+        if (test_truth[i] < 40) {
+            object3d.position_x_ = test_truth[i];
+            object3d.track_id_ = -1;
+            vector<Object3d> left_lmk;
+            left_lmk.push_back(object3d);
+            object3d.track_id_ = 1;
+            object3d.position_x_ = test_estimation[i][0];
+            vector<Object3d> right_lmk;
+            right_lmk.push_back(object3d);
+            utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
+            utils.draw_bird_view(bvImg, right_lmk, depth_bot, lateral_half_range);
+            cv::imshow("bv", bvImg);
+            cvWaitKey(0);
+//            break;
+        }
+
+    }
+
 
     return 0;
 }
