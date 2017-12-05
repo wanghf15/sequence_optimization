@@ -3,10 +3,13 @@
 #include <fstream>
 #include <map>
 #include <glob.h>
+#include <opencv2/core/mat.hpp>
+#include <opencv/cv.hpp>
 #include "ceres/ceres.h"
 #include "gflags/gflags.h"
 #include "glog/logging.h"
 #include "json.h"
+#include "draw_util.h"
 
 using json = nlohmann::json;
 using ceres::AutoDiffCostFunction;
@@ -15,6 +18,7 @@ using ceres::Problem;
 using ceres::Solver;
 using ceres::Solve;
 using namespace std;
+using namespace sequence_optimization;
 
 struct DepthResidual {
     DepthResidual(double w, double f) : w_(w), f_(f){};
@@ -34,7 +38,7 @@ struct RealWidthResidual {
     RealWidthResidual(double hc, double w, double y) : hc_(hc), w_(w), y_(y){};
 
     template <typename T> bool operator()(const T*const real_width, T* residual) const {
-        residual[0] = 5.0 * (hc_ * w_ / y_ - real_width[0]);
+        residual[0] = (hc_ * w_ / y_ - real_width[0]);
         return true;
     }
 
@@ -47,9 +51,22 @@ private:
 struct VelocityResidual {
     template <typename T> bool operator()(const T*const x2, const T*const x1,
                                           const T*const x0, T* residual) const {
-        residual[0] = 10.0 * (x2[0] - 2.0 * x1[0] + x0[0]);
+        residual[0] = (x2[0] - 2.0 * x1[0] + x0[0]);
         return true;
     }
+};
+
+struct LateralResidual {
+    LateralResidual(double x, double y, double hc) : x_(x), y_(y), hc_(hc){};
+
+    template <typename T> bool operator()(const T*const lateral, T* residual) const {
+        residual[0] = hc_ / y_ * x_ - lateral[0];
+    }
+
+private:
+    const double x_;
+    const double y_;
+    const double hc_;
 };
 
 DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
@@ -64,10 +81,6 @@ int window_length = 11;
 double getCurrentDepth(vector<vector<double>> obs, int end_index) {
     // x1~xn, w
     vector<double> optimization_vars;
-
-    if (end_index == 191) {
-        cout << "a" << endl;
-    }
 
     for (int i = 0; i < window_length; i++) {
         optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1 + i][0] - static_foey) * focal_len);
@@ -176,12 +189,13 @@ vector<string> globVector(const string& pattern){
 }
 
 int main(int argc, char** argv) {
+    Utils utils;
     double angle_input = 30;
 //    CERES_GFLAGS_NAMESPACE::ParseCommandLineFlags(&argc, *argv, true);
     google::InitGoogleLogging(argv[0]);
 
     // load data from json
-    string dataset_folder = "../data/tracklets/";
+    string dataset_folder = "../data/tracklet/";
     vector<string> json_path_list = globVector(dataset_folder + "*.json");
     string json_path = "../data/tracklets.json";
     ifstream json_file(json_path);
@@ -310,7 +324,7 @@ int main(int argc, char** argv) {
                                 cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
                 temp.push_back(w);
 
-                if (i >= 9) {
+                if (i >= window_length - 1) {
                     depth_truth.push_back(depth);
                 }
 
@@ -327,14 +341,43 @@ int main(int argc, char** argv) {
         }
     }
 
-
-//    for (int i = 0 ; i < true_depth.size(); i++) {
-//        cout << "abs error : " << setprecision(2) << true_depth[i] - depth_estimation[i] << ", " << "per error : "
-//             << setprecision(2) << (true_depth[i] - depth_estimation[i]) / true_depth[i] * 100.0 << "%" << "," <<
-//             true_depth[i] << endl;
-//    }
-
     showErrorStat(id_to_truth, id_to_estimation);
+
+    // 画图
+    const float depth_bot = -2.f;
+    const float lateral_half_range = 10.f;
+    cv::Mat bvImg = cv::Mat::zeros(800, 300, CV_8UC3);
+
+    Object3d object3d;
+
+    object3d.length_= 5.0;
+    object3d.width_ = 2;
+    object3d.position_y_ = 2;
+    object3d.theta_ = 0;
+    for (auto &truth : id_to_truth) {
+        int track_id = truth.first;
+        vector<double> cur_truth = truth.second;
+        vector<double> cur_esti = id_to_estimation[track_id];
+        for (int i = 0; i < cur_truth.size(); i++) {
+            bvImg.setTo(cv::Scalar(0, 0, 0));
+            object3d.position_x_ = cur_truth[i];
+            object3d.track_id_ = -1;
+            vector<Object3d> left_lmk;
+            left_lmk.push_back(object3d);
+            object3d.track_id_ = 1;
+            object3d.position_x_ = cur_esti[i];
+            vector<Object3d> right_lmk;
+            right_lmk.push_back(object3d);
+            utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
+            utils.draw_bird_view(bvImg, right_lmk, depth_bot, lateral_half_range);
+            char* filename;
+            sprintf(filename, "../res_img/%d_%d.jpg", track_id, i);
+//            cv::imshow("bv", bvImg);
+            cv::imwrite(filename, bvImg);
+//            cvWaitKey(0);
+        }
+    }
+
 
     return 0;
 }

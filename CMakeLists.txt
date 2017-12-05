@@ -4,8 +4,9 @@ project(optimization)
 set(CMAKE_CXX_STANDARD 11)
 
 find_package(Ceres REQUIRED)
-include_directories(${CERES_INCLUDE_DIRS})
+find_package(OpenCV REQUIRED)
+include_directories(${CERES_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 
 set(SOURCE_FILES main.cpp json.h draw_util.cpp draw_util.h)
 add_executable(optimization ${SOURCE_FILES})
-target_link_libraries(optimization ${CERES_LIBRARIES})
+target_link_libraries(optimization ${CERES_LIBRARIES} ${OpenCV_LIBS})
