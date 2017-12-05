@@ -12,8 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17022bf8-5757-4698-9ad8-485904348f92" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
-      <change beforePath="$PROJECT_DIR$/res_20171205.tar.gz" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -59,8 +58,8 @@
       <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="81" column="20" lean-forward="false" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+            <state relative-caret-position="129">
+              <caret line="197" column="48" lean-forward="true" selection-start-line="197" selection-start-column="48" selection-end-line="197" selection-end-column="48" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
                 <element signature="e#1255#1267#0" expanded="true" />
@@ -233,7 +232,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56609000" />
+    <option name="totallyTimeSpent" value="57072000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="186" width="1855" height="1084" extended-state="6" />
@@ -707,8 +706,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="81" column="20" lean-forward="false" selection-start-line="81" selection-start-column="20" selection-end-line="81" selection-end-column="20" />
+        <state relative-caret-position="129">
+          <caret line="197" column="48" lean-forward="true" selection-start-line="197" selection-start-column="48" selection-end-line="197" selection-end-column="48" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
             <element signature="e#1255#1267#0" expanded="true" />
