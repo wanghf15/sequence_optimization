@@ -12,31 +12,31 @@ namespace sequence_optimization {
      * @param end_index
      * @return  {x, y, w}
      */
-    vector<double> LeastSquareOptimization::getEstimationResult(vector<vector<double>> obs, int end_index) {
+    MeasurementObject LeastSquareOptimization::getEstimationResult(vector<MeasurementObject> obs, int end_index) {
+        int cur_window_length = min(end_index, window_length);
         // x1,y1,...,xn,yn,w
-        double optimization_vars[window_length * 2 + 1];
+        double optimization_vars[cur_window_length * 2 + 1];
 
-        for (int i = 0; i < window_length; i++) {
+        for (int i = 0; i < cur_window_length; i++) {
             // initial xi
-            optimization_vars[2 * i] = camera_height / (obs[end_index - window_length + 1 + i][1] - static_foey) * focal_len;
+            optimization_vars[2 * i] = camera_height / (obs[end_index - cur_window_length + 1 + i].yi - static_foey) * focal_len;
             // initial yi
-            optimization_vars[2 * i + 1] = camera_height / (obs[end_index - window_length + 1 + i][1] * obs[end_index - window_length + 1 + i][0]);
+            optimization_vars[2 * i + 1] = camera_height / (obs[end_index - cur_window_length + 1 + i].yi * obs[end_index - cur_window_length + 1 + i].xi);
         }
         // initial w
-        optimization_vars[2 * window_length] = camera_height / (obs[end_index - window_length + 1][1] - static_foey)
-                            * obs[end_index - window_length + 1][2];
+        optimization_vars[2 * cur_window_length] = camera_height / (obs[end_index - cur_window_length + 1].yi - static_foey)
+                            * obs[end_index - cur_window_length + 1].wi;
 
-        double *W = &optimization_vars[window_length * 2];
+        double *W = &optimization_vars[cur_window_length * 2];
         Problem problem;
 
-        for (int i = 0; i < window_length; i++) {
+        for (int i = 0; i < cur_window_length; i++) {
             double *Xi = &optimization_vars[i * 2];
             double *Yi = &optimization_vars[i * 2 + 1];
-            double xi = obs[end_index - window_length + 1 + i][0];
-            double yi = obs[end_index - window_length + 1 + i][1];
-            double wi = obs[end_index - window_length + 1 + i][2];
+            double xi = obs[end_index - cur_window_length + 1 + i].xi;
+            double yi = obs[end_index - cur_window_length + 1 + i].yi;
+            double wi = obs[end_index - cur_window_length + 1 + i].wi;
 
-            // 优化变量不能用引用！
             problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
                     new DepthResidual(wi, focal_len)), NULL, Xi, W);
 
@@ -50,11 +50,11 @@ namespace sequence_optimization {
 //                    new DepthResidualEx(camera_height, obs[end_index - window_length + 1 + i][0], focal_len)), NULL,
 //                                     &optimization_vars[i]);
 
-            if (i < window_length - 2) {
+            if (i < cur_window_length - 2) {
                 problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
-                        new VelocityResidual), NULL, &optimization_vars[(i + 2) * 2], &optimization_vars[(i + 1) * 2], &optimization_vars[i * 2]);
-                problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
-                        new VelocityResidual), NULL, &optimization_vars[i * 2 + 5], &optimization_vars[i * 2 + 3], &optimization_vars[i * 2 + 1]);
+                        new VelocityResidual), NULL, &optimization_vars[(i + 2) * 2], &optimization_vars[(i + 1) * 2], Xi);
+//                problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+//                        new VelocityResidual), NULL, &optimization_vars[i * 2 + 5], &optimization_vars[i * 2 + 3], &optimization_vars[i * 2 + 1]);
             }
         }
 
@@ -69,10 +69,10 @@ namespace sequence_optimization {
         Solver::Summary summary;
         Solve(options, &problem, &summary);
 
-        vector<double> res;
-        res.push_back(optimization_vars[(window_length - 1) * 2]);
-        res.push_back(optimization_vars[(window_length - 1) * 2 + 1]);
-        res.push_back(optimization_vars[window_length * 2]);
+        MeasurementObject res;
+        res.xi = (optimization_vars[(cur_window_length - 1) * 2]);
+        res.yi = (optimization_vars[(cur_window_length - 1) * 2 + 1]);
+        res.wi = (optimization_vars[cur_window_length * 2]);
 
         return res;
     }

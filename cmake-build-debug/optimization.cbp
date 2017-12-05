@@ -5,46 +5,46 @@
 		<Option title="optimization"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\local\;CMake Files\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\;CMake Files\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\usr\lib\cmake\eigen3\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\usr\local\;CMake Files\..\..\..\..\..\usr\local\lib\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\;CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\;CMake Files\..\..\..\..\..\usr\local\share\;CMake Files\..\..\..\..\..\usr\local\share\OpenCV\;CMake Files\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\usr\lib\cmake\;CMake Files\..\..\..\..\..\usr\lib\cmake\eigen3\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
+				<Option working_dir="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
+				<Option working_dir="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
+				<Option working_dir="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="optimization">
-				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
+				<Option output="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/wanghf/momenta/sequence_optimization/include"/>
+					<Add directory="/home/wanghf/dev/momenta/sequence_optimization/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/local/include/opencv"/>
@@ -57,20 +57,20 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="optimization/fast">
-				<Option output="/home/wanghf/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/wanghf/momenta/sequence_optimization/cmake-build-debug"/>
+				<Option output="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/optimization" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/wanghf/momenta/sequence_optimization/include"/>
+					<Add directory="/home/wanghf/dev/momenta/sequence_optimization/include"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/include/eigen3"/>
 					<Add directory="/usr/local/include/opencv"/>
@@ -83,66 +83,66 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization/fast"/>
-					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j4 -f &quot;/home/wanghf/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 optimization/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/log_error_info.cpp">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/src/log_error_info.cpp">
 			<Option target="optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/ls_optimization.cpp">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/src/ls_optimization.cpp">
 			<Option target="optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/main.cpp">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/src/main.cpp">
 			<Option target="optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/read_data.cpp">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/src/read_data.cpp">
 			<Option target="optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/src/utils.cpp">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/src/utils.cpp">
 			<Option target="optimization"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/CMakeLists.txt">
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/CeresConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/CeresConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/CeresConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/CeresConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/FindEigen.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/FindEigen.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/FindGlog.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/FindGlog.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/FindGflags.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/FindGflags.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/CeresTargets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/CeresTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/lib/cmake/Ceres/CeresTargets-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/lib/cmake/Ceres/CeresTargets-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\lib\cmake\Ceres\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/share/OpenCV/OpenCVConfig-version.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/share/OpenCV/OpenCVConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/share/OpenCV/OpenCVModules.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\local\share\OpenCV\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/local/share/OpenCV/OpenCVModules-release.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\local\share\OpenCV\"/>
 		</Unit>
-		<Unit filename="/home/wanghf/momenta/sequence_optimization/../../../../usr/lib/cmake/eigen3/Eigen3Config.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\cmake\eigen3\"/>
+		<Unit filename="/home/wanghf/dev/momenta/sequence_optimization/../../../../../usr/lib/cmake/eigen3/Eigen3Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\usr\lib\cmake\eigen3\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

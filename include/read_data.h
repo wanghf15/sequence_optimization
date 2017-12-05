@@ -20,24 +20,16 @@ namespace sequence_optimization {
          * @param path
          * @return map: trackid -> measurements
          */
-        map<int, vector<vector<double >>> read_by_tracklets_from_path(string path);
-
-        vector<vector<double >> read_by_tracklets_from_file(string filename);
+        map<int, vector<MeasurementObject>> read_by_tracklets_from_path(string path);
 
         /**
          * 遍历文件夹读取数据,存储形式为frames
          * @param path
          * @return map: video num -> measurements
          */
-        map<int, vector<vector<double >>> read_by_frames_from_path(string path);
-
-
-        map<int, vector<vector<double >>> read_by_frames_from_file(string filename);
-
+        map<string, map<int, vector<MeasurementObject >>> read_by_frames_from_path(string path);
 
     private:
-        // 观测量,{x-foex, y-foey, w, true_depth}
-        map<int, vector<vector<double >>> measurements;
         Utils utils;
     };
 }

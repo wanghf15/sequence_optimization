@@ -12,6 +12,7 @@
 #include "glog/logging.h"
 #include "glob.h"
 #include "cost_function.h"
+#include "ls_optimization.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -22,9 +23,18 @@ using ceres::Solver;
 using ceres::Solve;
 
 namespace sequence_optimization {
+    struct MeasurementObject {
+        double xi;
+        double yi;
+        double wi;
+        double true_depth;
+        double true_width;
+        double true_yaw;
+    };
+
     class LeastSquareOptimization {
     public:
-        vector<double> getEstimationResult(vector<vector<double>> obs, int end_index);
+        MeasurementObject getEstimationResult(vector<MeasurementObject> obs, int end_index);
         double getEstimationResultDepth(vector<vector<double>> obs, int end_index);
 
     }; // end of class
@@ -33,30 +43,30 @@ namespace sequence_optimization {
         int track_id_;
 
         // size
-        float length_;
-        float width_;
-        float height_;
+        double length_;
+        double width_;
+        double height_;
 
         // car attributes
         int cls_type_minor_;
 
         // location
-        float position_x_;
-        float position_y_;
-        float theta_;
-        float pos_x_sigma_;
-        float pos_y_sigma_;
-        float theta_sigma_;
+        double position_x_;
+        double position_y_;
+        double theta_;
+        double pos_x_sigma_;
+        double pos_y_sigma_;
+        double theta_sigma_;
 
         // speed
-        float speed_x_;
-        float speed_y_;
-        float speed_x_sigma_;
-        float speed_y_sigma_;
+        double speed_x_;
+        double speed_y_;
+        double speed_x_sigma_;
+        double speed_y_sigma_;
 
         // adas functions
-        float ttc_;
-        float hmw_;
+        double ttc_;
+        double hmw_;
         bool is_dangerous_;
     };
 

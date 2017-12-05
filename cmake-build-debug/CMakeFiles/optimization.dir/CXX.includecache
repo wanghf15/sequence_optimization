@@ -69,6 +69,8 @@ map
 -
 vector
 ../include/vector
+ls_optimization.h
+../include/ls_optimization.h
 
 ../include/ls_optimization.h
 vector
@@ -85,6 +87,8 @@ glob.h
 ../include/glob.h
 cost_function.h
 ../include/cost_function.h
+ls_optimization.h
+../include/ls_optimization.h
 
 ../include/read_data.h
 json.h
@@ -108,9 +112,9 @@ chrono
 ls_optimization.h
 ../include/ls_optimization.h
 
-/home/wanghf/momenta/sequence_optimization/include/cost_function.h
+/home/wanghf/dev/momenta/sequence_optimization/include/cost_function.h
 
-/home/wanghf/momenta/sequence_optimization/include/json.h
+/home/wanghf/dev/momenta/sequence_optimization/include/json.h
 algorithm
 -
 array
@@ -166,41 +170,45 @@ utility
 vector
 -
 
-/home/wanghf/momenta/sequence_optimization/include/log_error_info.h
+/home/wanghf/dev/momenta/sequence_optimization/include/log_error_info.h
 map
 -
 vector
-/home/wanghf/momenta/sequence_optimization/include/vector
+/home/wanghf/dev/momenta/sequence_optimization/include/vector
+ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/include/ls_optimization.h
 
-/home/wanghf/momenta/sequence_optimization/include/ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/include/ls_optimization.h
 vector
 -
 ceres/ceres.h
 -
 json.h
-/home/wanghf/momenta/sequence_optimization/include/json.h
+/home/wanghf/dev/momenta/sequence_optimization/include/json.h
 gflags/gflags.h
-/home/wanghf/momenta/sequence_optimization/include/gflags/gflags.h
+/home/wanghf/dev/momenta/sequence_optimization/include/gflags/gflags.h
 glog/logging.h
-/home/wanghf/momenta/sequence_optimization/include/glog/logging.h
+/home/wanghf/dev/momenta/sequence_optimization/include/glog/logging.h
 glob.h
-/home/wanghf/momenta/sequence_optimization/include/glob.h
+/home/wanghf/dev/momenta/sequence_optimization/include/glob.h
 cost_function.h
-/home/wanghf/momenta/sequence_optimization/include/cost_function.h
+/home/wanghf/dev/momenta/sequence_optimization/include/cost_function.h
+ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/include/ls_optimization.h
 
-/home/wanghf/momenta/sequence_optimization/include/read_data.h
+/home/wanghf/dev/momenta/sequence_optimization/include/read_data.h
 json.h
-/home/wanghf/momenta/sequence_optimization/include/json.h
+/home/wanghf/dev/momenta/sequence_optimization/include/json.h
 vector
 -
 string
 -
 utils.h
-/home/wanghf/momenta/sequence_optimization/include/utils.h
+/home/wanghf/dev/momenta/sequence_optimization/include/utils.h
 
-/home/wanghf/momenta/sequence_optimization/include/system_parameters.h
+/home/wanghf/dev/momenta/sequence_optimization/include/system_parameters.h
 
-/home/wanghf/momenta/sequence_optimization/include/utils.h
+/home/wanghf/dev/momenta/sequence_optimization/include/utils.h
 opencv2/opencv.hpp
 -
 fstream
@@ -208,23 +216,25 @@ fstream
 chrono
 -
 ls_optimization.h
-/home/wanghf/momenta/sequence_optimization/include/ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/include/ls_optimization.h
 
-/home/wanghf/momenta/sequence_optimization/src/log_error_info.cpp
+/home/wanghf/dev/momenta/sequence_optimization/src/log_error_info.cpp
 iostream
 -
 cmath
 -
 ../include/log_error_info.h
-/home/wanghf/momenta/sequence_optimization/include/log_error_info.h
+/home/wanghf/dev/momenta/sequence_optimization/include/log_error_info.h
+ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/src/ls_optimization.h
 
-/home/wanghf/momenta/sequence_optimization/src/ls_optimization.cpp
+/home/wanghf/dev/momenta/sequence_optimization/src/ls_optimization.cpp
 ../include/ls_optimization.h
-/home/wanghf/momenta/sequence_optimization/include/ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/include/ls_optimization.h
 ../include/system_parameters.h
-/home/wanghf/momenta/sequence_optimization/include/system_parameters.h
+/home/wanghf/dev/momenta/sequence_optimization/include/system_parameters.h
 
-/home/wanghf/momenta/sequence_optimization/src/main.cpp
+/home/wanghf/dev/momenta/sequence_optimization/src/main.cpp
 iostream
 -
 vector
@@ -232,41 +242,41 @@ vector
 map
 -
 json.h
-/home/wanghf/momenta/sequence_optimization/src/json.h
+/home/wanghf/dev/momenta/sequence_optimization/src/json.h
 system_parameters.h
-/home/wanghf/momenta/sequence_optimization/src/system_parameters.h
+/home/wanghf/dev/momenta/sequence_optimization/src/system_parameters.h
 ls_optimization.h
-/home/wanghf/momenta/sequence_optimization/src/ls_optimization.h
+/home/wanghf/dev/momenta/sequence_optimization/src/ls_optimization.h
 log_error_info.h
-/home/wanghf/momenta/sequence_optimization/src/log_error_info.h
+/home/wanghf/dev/momenta/sequence_optimization/src/log_error_info.h
 read_data.h
-/home/wanghf/momenta/sequence_optimization/src/read_data.h
+/home/wanghf/dev/momenta/sequence_optimization/src/read_data.h
 utils.h
-/home/wanghf/momenta/sequence_optimization/src/utils.h
+/home/wanghf/dev/momenta/sequence_optimization/src/utils.h
 
-/home/wanghf/momenta/sequence_optimization/src/read_data.cpp
+/home/wanghf/dev/momenta/sequence_optimization/src/read_data.cpp
 fstream
 -
 ../include/read_data.h
-/home/wanghf/momenta/sequence_optimization/include/read_data.h
+/home/wanghf/dev/momenta/sequence_optimization/include/read_data.h
 glob.h
-/home/wanghf/momenta/sequence_optimization/src/glob.h
+/home/wanghf/dev/momenta/sequence_optimization/src/glob.h
 ../include/json.h
-/home/wanghf/momenta/sequence_optimization/include/json.h
+/home/wanghf/dev/momenta/sequence_optimization/include/json.h
 ../include/utils.h
-/home/wanghf/momenta/sequence_optimization/include/utils.h
+/home/wanghf/dev/momenta/sequence_optimization/include/utils.h
 ../include/system_parameters.h
-/home/wanghf/momenta/sequence_optimization/include/system_parameters.h
+/home/wanghf/dev/momenta/sequence_optimization/include/system_parameters.h
 string
 -
 
-/home/wanghf/momenta/sequence_optimization/src/utils.cpp
+/home/wanghf/dev/momenta/sequence_optimization/src/utils.cpp
 math.h
 -
 utils.h
-/home/wanghf/momenta/sequence_optimization/src/utils.h
+/home/wanghf/dev/momenta/sequence_optimization/src/utils.h
 system_parameters.h
-/home/wanghf/momenta/sequence_optimization/src/system_parameters.h
+/home/wanghf/dev/momenta/sequence_optimization/src/system_parameters.h
 
 /usr/include/eigen3/Eigen/Cholesky
 Core

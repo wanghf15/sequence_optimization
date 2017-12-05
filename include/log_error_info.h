@@ -7,12 +7,13 @@
 
 #include <map>
 #include "vector"
+#include "ls_optimization.h"
 using namespace std;
 
 namespace sequence_optimization {
     class Log_Error_Info {
     public:
-        void showErrorStat(map<int,vector<double> > truth, map<int, vector<vector<double> >> estimation);
+        void showErrorStat(map<int,vector<double> > truth, map<int, vector<MeasurementObject >> estimation);
     };
 }
 

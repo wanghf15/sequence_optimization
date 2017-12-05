@@ -19,9 +19,9 @@ namespace sequence_optimization {
          * 判断是否在正常角度和横向距离
          * @param yaw 与正前方夹角
          * @param position {x,y,z}
-         * @return true: 有效数据
+         * @return true: 无效数据
          */
-        bool isValidData(double yaw, double position[3]);
+        bool isInvalidData(double yaw, double position[3]);
         /**
          * 获取系统时间
          * @return

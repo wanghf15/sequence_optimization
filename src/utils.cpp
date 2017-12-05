@@ -7,21 +7,19 @@
 #include "system_parameters.h"
 
 namespace sequence_optimization {
-    bool Utils::isValidData(double yaw, double *position) {
+    bool Utils::isInvalidData(double yaw, double *position) {
         bool side_view = false;
         bool flat_road = true;
 
-        double angle_range = angle_range / 180.0 * M_PI;
-        if (yaw > angle_range && yaw < M_PI_2 + angle_range)
+        double angle_range_rad = angle_range / 180.0 * M_PI;
+        if (yaw > angle_range_rad && yaw < M_PI_2 + angle_range_rad)
             side_view = true;
-        if (yaw < -angle_range && yaw > -M_PI_2 - angle_range)
+        if (yaw < -angle_range_rad && yaw > -M_PI_2 - angle_range_rad)
             side_view = true;
 
-        double lateral_range = 5.0;
         if (position[0] > lateral_range || position[0] < -lateral_range) {
             side_view = true;
         }
-        double height_range = 0.5;
         if (position[1] > height_range + camera_height || position[1] < camera_height - height_range) {
             flat_road = false;
         }
@@ -98,13 +96,13 @@ namespace sequence_optimization {
             int npt[] = {4};
             cv::fillPoly(visImg, ppt, npt, 1, color);
 
-//        // draw speed vector
-//        const double vx = obj.speed_x_;
-//        const double vy = obj.speed_y_;
-//        cv::line(visImg,
-//                 bv_2_visImg(cv::Point2f(x0, y0), bot_center_bv, bot_center_img, scale),
-//                 bv_2_visImg(cv::Point2f(x0 + vx * 2.f, y0 + vy * 2.f), bot_center_bv, bot_center_img, scale),
-//                 color, 1);
+            // draw speed vector
+            const double vx = obj.speed_x_;
+            const double vy = obj.speed_y_;
+            cv::line(visImg,
+                 bv_2_visImg(cv::Point2f(x0, y0), bot_center_bv, bot_center_img, scale),
+                 bv_2_visImg(cv::Point2f(x0 + vx * 2.f, y0 + vy * 2.f), bot_center_bv, bot_center_img, scale),
+                 color, 1);
 
             if (obj.track_id_ >= 0) {
                 char out[100];

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/ls_optimization.dir/src/log_error_info.cpp.o CMakeFiles/ls_optimization.dir/src/ls_optimization.cpp.o CMakeFiles/ls_optimization.dir/src/read_data.cpp.o CMakeFiles/ls_optimization.dir/src/utils.cpp.o  -o ls_optimization 
