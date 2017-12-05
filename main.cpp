@@ -79,7 +79,7 @@ double static_foey = 360;
 int window_length = 11;
 
 double getCurrentDepth(vector<vector<double>> obs, int end_index) {
-    // x1~xn, w
+    // x1~xn, y1~yn, w
     vector<double> optimization_vars;
 
     for (int i = 0; i < window_length; i++) {
