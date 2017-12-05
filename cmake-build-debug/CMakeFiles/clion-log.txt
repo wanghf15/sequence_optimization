@@ -4,7 +4,6 @@
 -- Found required Ceres dependency: glog
 -- Found required Ceres dependency: gflags
 -- Found Ceres version: 1.13.0 installed in: /usr/local with components: [LAPACK, SuiteSparse, SparseLinearAlgebraLibrary, CXSparse, SchurSpecializations, OpenMP]
--- Found OpenCV: /usr/local (found version "3.3.1") 
 -- Configuring done
 -- Generating done
 -- Build files have been written to: /home/wanghf/dev/momenta/sequence_optimization/cmake-build-debug
