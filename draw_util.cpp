@@ -66,12 +66,12 @@ namespace sequence_optimization {
             cv::fillPoly(visImg, ppt, npt, 1, color);
 
 //        // draw speed vector
-//        const float vx = obj.speed_x_;
-//        const float vy = obj.speed_y_;
-//        cv::line(visImg,
-//                 bv_2_visImg(cv::Point2f(x0, y0), bot_center_bv, bot_center_img, scale),
-//                 bv_2_visImg(cv::Point2f(x0 + vx * 2.f, y0 + vy * 2.f), bot_center_bv, bot_center_img, scale),
-//                 color, 1);
+            const float vx = obj.speed_x_;
+            const float vy = obj.speed_y_;
+            cv::line(visImg,
+                 bv_2_visImg(cv::Point2f(x0, y0), bot_center_bv, bot_center_img, scale),
+                 bv_2_visImg(cv::Point2f(x0 + vx * 2.f, y0 + vy * 2.f), bot_center_bv, bot_center_img, scale),
+                 color, 1);
 
             if (obj.track_id_ >= 0) {
                 char out[100];

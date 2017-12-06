@@ -69,6 +69,18 @@ private:
     const double hc_;
 };
 
+struct TruthObject {
+    double x;
+    double y;
+    double vx;
+    double vy;
+};
+
+struct EstiObject {
+    double depth;
+    double vx;
+};
+
 DEFINE_string(minimizer, "trust_region", "Minimizer type tp use, choices are : line_search & trust region");
 
 // init car manager
@@ -78,30 +90,35 @@ double static_foex = 640;
 double static_foey = 360;
 int window_length = 11;
 
-double getCurrentDepth(vector<vector<double>> obs, int end_index) {
+EstiObject getCurrentDepth(vector<vector<double>> obs, int end_index) {
     // x1~xn, y1~yn, w
     vector<double> optimization_vars;
 
     for (int i = 0; i < window_length; i++) {
         optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1 + i][0] - static_foey) * focal_len);
-        if (i == window_length - 1) {
-            optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1][0] - static_foey)
-                                        * obs[end_index - window_length + 1][1]);
-        }
+        optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1 + i][0] - static_foey) *
+                                            (obs[end_index - window_length + 1 + i][2]- static_foex));
     }
 
+    optimization_vars.push_back(camera_height / (obs[end_index - window_length + 1][0] - static_foey)
+                                    * obs[end_index - window_length + 1][1]);
     Problem problem;
 
     for (int i = 0; i < window_length; i++) {
         problem.AddResidualBlock(new AutoDiffCostFunction<DepthResidual, 1, 1, 1>(
                 new DepthResidual(obs[end_index - window_length + 1 + i][1], focal_len)), NULL,
-                                 &optimization_vars[i], &optimization_vars[window_length]);
+                                 &optimization_vars[i * 2], &optimization_vars[window_length * 2]);
         problem.AddResidualBlock(new AutoDiffCostFunction<RealWidthResidual, 1, 1>(
                 new RealWidthResidual(camera_height, obs[end_index - window_length + 1 + i][1],
-                                      obs[end_index - window_length + 1 + i][0])), NULL, &optimization_vars[window_length]);
+                                      obs[end_index - window_length + 1 + i][0])), NULL, &optimization_vars[window_length * 2]);
+//        problem.AddResidualBlock(new AutoDiffCostFunction<LateralResidual, 1, 1>(
+//                new LateralResidual(obs[end_index - window_length + 1 + i][2],
+//                                      obs[end_index - window_length + 1 + i][0], camera_height)), NULL, &optimization_vars[i * 2 + 1]);
         if (i < window_length - 2) {
             problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
-                    new VelocityResidual), NULL, &optimization_vars[i + 2], &optimization_vars[i + 1], &optimization_vars[i]);
+                    new VelocityResidual), NULL, &optimization_vars[(i + 2) * 2], &optimization_vars[(i + 1) * 2], &optimization_vars[i * 2]);
+            problem.AddResidualBlock(new AutoDiffCostFunction<VelocityResidual, 1, 1, 1, 1>(
+                    new VelocityResidual), NULL, &optimization_vars[(i + 2) * 2 + 1], &optimization_vars[(i + 1) * 2 + 1], &optimization_vars[i * 2 + 1]);
         }
     }
 
@@ -116,9 +133,11 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
     Solver::Summary summary;
     Solve(options, &problem, &summary);
 
-//    cout << summary.FullReport();
+    EstiObject object;
+    object.depth = optimization_vars[window_length * 2 - 2];
+    object.vx = optimization_vars[window_length * 2 - 2] - optimization_vars[window_length * 2 - 4];
 
-    return optimization_vars[window_length - 1];
+    return object;
 }
 
 /**
@@ -126,45 +145,45 @@ double getCurrentDepth(vector<vector<double>> obs, int end_index) {
  * @param truth
  * @param estimation
  */
-void showErrorStat(map<int,vector<double> > truth, map<int, vector<double> > estimation) {
+void showErrorStat(map<int,vector<TruthObject> > truth, map<int, vector<EstiObject> > estimation) {
     double errors[10];
     int error_count[10] = {0};
-    map<int, vector<double> >::iterator it;
+    map<int, vector<TruthObject> >::iterator it;
     for (it = truth.begin(); it != truth.end(); ++it) {
         int trackid = it->first;
-        vector<double> depth_truth = it->second;
-        vector<double> depth_estimation = estimation[trackid];
+        vector<TruthObject> depth_truth = it->second;
+        vector<EstiObject> depth_estimation = estimation[trackid];
         for (int i = 0; i < depth_truth.size(); i++) {
-            if (depth_truth[i] < 10) {
-                errors[0] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            if (depth_truth[i].x < 10) {
+                errors[0] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[0]++;
             }
-            else if (depth_truth[i] < 20) {
-                errors[1] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 20) {
+                errors[1] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[1]++;
             }
-            else if (depth_truth[i] < 30) {
-                errors[2] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 30) {
+                errors[2] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[2]++;
             }
-            else if (depth_truth[i] < 40) {
-                errors[3] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 40) {
+                errors[3] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[3]++;
             }
-            else if (depth_truth[i] < 50) {
-                errors[4] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 50) {
+                errors[4] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[4]++;
             }
-            else if (depth_truth[i] < 60) {
-                errors[5] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 60) {
+                errors[5] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[5]++;
             }
-            else if (depth_truth[i] < 70) {
-                errors[6] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+            else if (depth_truth[i].x < 70) {
+                errors[6] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[6]++;
             }
             else {
-                errors[7] += abs(depth_truth[i] - depth_estimation[i]) / depth_truth[i];
+                errors[7] += abs(depth_truth[i].x - depth_estimation[i].depth) / depth_truth[i].x;
                 error_count[7]++;
             }
         }
@@ -205,8 +224,8 @@ int main(int argc, char** argv) {
 
     map<int, vector<vector<double>>> id_to_carframes;
     map<int, vector<vector<double>>> id_to_carframes_3d;
-    map<int, vector<double>> id_to_estimation;
-    map<int, vector<double>> id_to_truth;
+    map<int, vector<EstiObject>> id_to_estimation;
+    map<int, vector<TruthObject>> id_to_truth;
 
     for (int clipidx = 0; clipidx < json_path_list.size(); clipidx++) {
         string json_path = json_path_list[clipidx];
@@ -235,9 +254,6 @@ int main(int argc, char** argv) {
             bool side_view = false;
             bool flat_road = true;
             for (auto &frame : frames) {
-                if (track_id == 623385) {
-                    int a = 0;
-                }
                 float gt_yaw = frame["gt_yaw"];
                 vector<vector<float>> cuboid_3d = frame["cuboid_3d"];
                 double time_stamp = frame["time_stamp"];
@@ -300,8 +316,8 @@ int main(int argc, char** argv) {
             // tailstock, four points
             vector<vector<double>> tailstock;
 
-            vector<double> depth_truth;
-            vector<double> depth_estimation;
+            vector<TruthObject> depth_truth;
+            vector<EstiObject> depth_estimation;
 
             int track_id = it->first;
             vector<vector<double >> cuboid_2d = it->second;
@@ -319,18 +335,32 @@ int main(int argc, char** argv) {
                 // w
                 double w = (cuboid_2d[i * 8 + 1][0] - cuboid_2d[i * 8 + 2][0] +
                             cuboid_2d[i * 8 + 5][0] - cuboid_2d[i * 8 + 6][0]) / 2;
-                // ground truth depth
-                double depth = (cuboid_3d[i * 8 + 1][2] + cuboid_3d[i * 8 + 2][2] +
-                                cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
                 temp.push_back(w);
+                // x
+                double x = (cuboid_2d[i * 8 + 0][0] + cuboid_2d[i * 8 + 1][0] +
+                            cuboid_2d[i * 8 + 2][0] + cuboid_2d[i * 8 + 3][0]) / 4;
+                temp.push_back(x);
+
+                // ground truth lateral
+                double lateral = (cuboid_3d[i * 8 + 1][0] + cuboid_3d[i * 8 + 2][0] +
+                                cuboid_3d[i * 8 + 0][0] + cuboid_3d[i * 8 + 3][0]) / 4;
+
 
                 if (i >= window_length - 1) {
-                    depth_truth.push_back(depth);
+                    // ground truth depth
+                    double depth = (cuboid_3d[i * 8 + 1][2] + cuboid_3d[i * 8 + 2][2] +
+                                    cuboid_3d[i * 8 + 5][2] + cuboid_3d[i * 8 + 6][2]) / 4;
+                    double last_depth = (cuboid_3d[(i-1) * 8 + 1][2] + cuboid_3d[(i-1) * 8 + 2][2] +
+                                         cuboid_3d[(i-1) * 8 + 5][2] + cuboid_3d[(i-1) * 8 + 6][2]) / 4;
+                    TruthObject info;
+                    info.x = depth;
+                    info.y = lateral;
+                    double velocity_x = depth - last_depth;
+                    info.vx = velocity_x;
+                    depth_truth.push_back(info);
                 }
 
                 tailstock.push_back(temp);
-
-
             }
 
             for (int j = window_length - 1; j < image_cnt; j++) {
@@ -356,22 +386,24 @@ int main(int argc, char** argv) {
     object3d.theta_ = 0;
     for (auto &truth : id_to_truth) {
         int track_id = truth.first;
-        vector<double> cur_truth = truth.second;
-        vector<double> cur_esti = id_to_estimation[track_id];
+        vector<TruthObject> cur_truth = truth.second;
+        vector<EstiObject> cur_esti = id_to_estimation[track_id];
         for (int i = 0; i < cur_truth.size(); i++) {
             bvImg.setTo(cv::Scalar(0, 0, 0));
-            object3d.position_x_ = cur_truth[i];
+            object3d.position_x_ = cur_truth[i].x;
             object3d.track_id_ = -1;
+            object3d.speed_x_ = cur_truth[i].vx;
             vector<Object3d> left_lmk;
             left_lmk.push_back(object3d);
             object3d.track_id_ = 1;
-            object3d.position_x_ = cur_esti[i];
+            object3d.position_x_ = cur_esti[i].depth;
+            object3d.speed_x_ = cur_esti[i].vx;
             vector<Object3d> right_lmk;
             right_lmk.push_back(object3d);
             utils.draw_bird_view(bvImg, left_lmk, depth_bot, lateral_half_range);
             utils.draw_bird_view(bvImg, right_lmk, depth_bot, lateral_half_range);
             char* filename;
-            sprintf(filename, "../res_img/%d_%d.jpg", track_id, i);
+            sprintf(filename, "../data/res_img/%d_%d.jpg", track_id, i);
 //            cv::imshow("bv", bvImg);
             cv::imwrite(filename, bvImg);
 //            cvWaitKey(0);
